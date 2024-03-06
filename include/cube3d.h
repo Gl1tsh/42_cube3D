@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:49 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/06 17:24:45 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/06 19:17:54 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/errno.h>
+# include <math.h>
 
 # define KEY_W 13
 # define KEY_S 1
@@ -52,6 +53,12 @@ typedef struct s_game
 	char	*canvas_bytes;
 	int		canvas_bpp;
 	int		canvas_line_size;
+	double	player_x;
+	double	player_y;
+	double	player_angle;
+	double	half_fov;
+	double	precision;
+	double	angle_increment;
 }	t_game;
 
 // free or quit game
