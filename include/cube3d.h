@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:49 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/06 16:06:19 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/06 17:24:45 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@ typedef struct s_game
 	t_map	map;
 	int		width;
 	int		height;
+	void	*canvas;
+	char	*canvas_bytes;
+	int		canvas_bpp;
+	int		canvas_line_size;
 }	t_game;
 
 // free or quit game
