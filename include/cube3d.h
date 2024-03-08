@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:49 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/08 17:23:36 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/08 18:24:45 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
 # define KEY_ESC 53
+
+# define FPS 60
 
 typedef struct s_map
 {
@@ -61,6 +63,9 @@ typedef struct s_game
 	double	half_fov;
 	double	precision;
 	double	angle_increment;
+	long	next_frame_ts;
+	long	frame_delay;
+	char	keys[256];
 }	t_game;
 
 // free or quit game

@@ -6,7 +6,7 @@
 #    By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 15:13:34 by nagiorgi          #+#    #+#              #
-#    Updated: 2024/03/06 16:14:32 by nagiorgi         ###   ########.fr        #
+#    Updated: 2024/03/06 19:19:09 by nagiorgi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = cub3D
 
 CC = gcc
 #FLAGS = -Wall -Wextra -Werror -I./include -I./minilibx # -I./libft
-FLAGS = -Wall -Wextra -I./include -I./minilibx
+FLAGS = -Wall -Wextra -I./include -I./minilibx -g
 MLXDIR = ./minilibx
 # LIBFTDIR = ./libft
 INCMLX = -L$(MLXDIR) -lmlx -framework OpenGL -framework AppKit -lm

@@ -6,11 +6,16 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:16 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/08 17:28:46 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/08 18:23:26 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+#include <sys/time.h>
+
+#include <string.h>
+#define ft_memset memset
+
 /*
 int	load_map(t_map *map, char *path_name)
 {
@@ -82,8 +87,8 @@ void	draw_rays(t_game *game)
 	x = 0;
 	while (x < game->width)
 	{
-		ray_x = game->map.player_x;
-		ray_y = game->map.player_y;
+		ray_x = game->player_x;
+		ray_y = game->player_y;
 		ray_cos = cos(ray_angle) / game->precision;
 		ray_sin = sin(ray_angle) / game->precision;
 		wall = '0';
@@ -93,7 +98,7 @@ void	draw_rays(t_game *game)
 			ray_y += ray_sin;
 			wall = map_get_at(&game->map, ray_x, ray_y);
 		}
-		distance = sqrt(pow(game->player_x  - ray_x, 2) + pow(game->player_y - ray_y, 2));
+		distance = sqrt(pow(game->player_x  - ray_x, 2.0) + pow(game->player_y - ray_y, 2.0));
 		distance = distance * cos(ray_angle - game->player_angle);
 		wall_height = (double)(game->height) / (1.5 * distance);
 		draw_vertical_line(game, x, 0, game->height / 2 - wall_height, game->map.celling_color);
@@ -121,27 +126,59 @@ void	move_player(t_game *game, double angle_delta)
 		game->player_x += delta_x;
 		game->player_y += delta_y;
 	}
+	printf("player x : %f player y: %f\n", game->player_x, game->player_y);
 }
 
 int	key_pressed(int keycode, t_game *game)
 {
-	if (keycode == KEY_ESC)
-		game_quit(game);
+	game->keys[keycode] = 1;
+	return (0);
+}
 
-	else if (keycode == KEY_W)
+int	key_release(int keycode, t_game *game)
+{
+	game->keys[keycode] = 0;
+	return (0);
+}
+
+long	get_timestamp_ms(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+}
+
+void	update(t_game *game)
+{
+	if (game->keys[KEY_ESC])
+		game_quit(game);
+	else if (game->keys[KEY_W])
 		move_player(game, 0.0);
-	else if (keycode == KEY_S)
+	else if (game->keys[KEY_S])
 		move_player(game, M_PI);
-	else if (keycode == KEY_A)
+	else if (game->keys[KEY_A])
 		move_player(game, -M_PI_2);
-	else if (keycode == KEY_D)
+	else if (game->keys[KEY_D])
 		move_player(game, M_PI_2);
-	if (keycode == KEY_LEFT)
+	if (game->keys[KEY_LEFT])
 		rotate_player(game, -1.0);
-	else if (keycode == KEY_RIGHT)
+	else if (game->keys[KEY_RIGHT])
 		rotate_player(game, 1.0);
-	draw_rays(game);
-	mlx_put_image_to_window(game->mlx, game->win, game->canvas, 0, 0);
+}
+
+int	game_loop(t_game *game)
+{
+	long	now;
+
+	now = get_timestamp_ms();
+	if (now > game->next_frame_ts)
+	{
+		update(game);
+		draw_rays(game);
+		mlx_put_image_to_window(game->mlx, game->win, game->canvas, 0, 0);
+		game->next_frame_ts = now + game->frame_delay;
+	}
 	return (0);
 }
 
@@ -153,11 +190,13 @@ int	main(int argc, char **argv)
 	game.precision = 128.0;
 	game.half_fov = M_PI_2 / 3.0;
 	game.player_angle = M_PI_2;
-	game.player_speed = 0.1;
-	game.player_angle_delta = 0.1;
+	game.player_speed = 0.05;
+	game.player_angle_delta = 0.05;
 	game.width = 1024;
 	game.height = 600;
+	game.frame_delay = 1000 / FPS;
 	game.angle_increment = 2 * game.half_fov / game.width;
+	ft_memset(game.keys, 0, 256);
 	if (load_map(&game.map, argv[1]) != 0)
 		game_quit_error(&game, "erreur de map");
 	game.player_x = game.map.player_x + 0.5;
@@ -173,7 +212,9 @@ int	main(int argc, char **argv)
 	game.canvas_bytes = mlx_get_data_addr(game.canvas, &game.canvas_bpp, &game.canvas_line_size, &endian);
 	game.canvas_bpp = game.canvas_bpp / 8;
 	mlx_hook(game.win, 17, 0, (void *)game_quit, &game);
-	mlx_key_hook(game.win, key_pressed, &game);
+	mlx_hook(game.win, 2, 1L << 0, key_pressed, &game);
+	mlx_hook(game.win, 3, 1L << 1, key_release, &game);
+	mlx_loop_hook(game.mlx, game_loop, &game);
 	mlx_loop(game.mlx);
 	return (1);
 }
