@@ -6,12 +6,12 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:16 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/06 19:24:40 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/08 16:59:19 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
-
+/*
 int	load_map(t_map *map, char *path_name)
 {
 	map->bytes = "111111" "120001" "100021" "100011" "133111";
@@ -19,6 +19,23 @@ int	load_map(t_map *map, char *path_name)
 	map->height = 5;
 	map->player_x = 2;
 	map->player_y = 2;
+	map->celling_color = 0x00aaaaff; //bleu pale
+	map->floor_color = 0x00608060; // vert gazon
+	map->wall_color = 0x00804000; // horrible
+	return (0);
+}
+*/
+
+int	load_map(t_map *map, char *path_name)
+{
+	map->width = 8;
+	map->height = 8;
+	map->bytes = malloc(map->width * map->height);
+	int fd = open("maps/map1.txt", O_RDONLY);
+    read(fd, map->bytes, map->width * map->height);
+    close(fd);
+	map->player_x = 3;
+	map->player_y = 1;
 	map->celling_color = 0x00aaaaff; //bleu pale
 	map->floor_color = 0x00608060; // vert gazon
 	map->wall_color = 0x00804000; // horrible
@@ -37,6 +54,16 @@ void	draw_vertical_line(t_game *game, int x, int start_y, int end_y, unsigned in
 		start_y++;
 	}
 }
+
+char	map_get_at(t_map *map, int x, int y)
+{
+	if (x < 0 || x > map->width)
+		return ('1');
+	if (y < 0 || y > map->height)
+		return ('1');
+	return (map->bytes[y * map->width + x]);
+}
+
 
 void	draw_rays(t_game *game)
 {
@@ -64,9 +91,10 @@ void	draw_rays(t_game *game)
 		{
 			ray_x += ray_cos;
 			ray_y += ray_sin;
-			wall = game->map.bytes[(int)(ray_y * game->map.width + ray_x)];
+			wall = map_get_at(&game->map, ray_x, ray_y);
 		}
 		distance = sqrt(pow(game->player_x  - ray_x, 2) + pow(game->player_y - ray_y, 2));
+		distance = distance * cos(ray_angle - game->player_angle);
 		wall_height = (double)(game->height / 2) / distance;
 		draw_vertical_line(game, x, 0, game->height / 2 - wall_height, game->map.celling_color);
 		draw_vertical_line(game, x, game->height / 2 - wall_height, game->height / 2 + wall_height, game->map.wall_color);
@@ -76,20 +104,34 @@ void	draw_rays(t_game *game)
 	}
 }
 
+void	move_player(t_game *game)
+{
+	double	delta_x;
+	double	delta_y;
+
+	delta_x = cos(game->player_angle) * game->player_speed;
+	delta_y = sin(game->player_angle) * game->player_speed;
+	if (map_get_at(&game->map, game->player_x + delta_x, game->player_y + delta_y) == '0')
+	{
+		game->player_x += delta_x;
+		game->player_y += delta_y;
+	}
+}
+
 int	key_pressed(int keycode, t_game *game)
 {
 	if (keycode == KEY_ESC)
 		game_quit(game);
-/*
+
 	else if (keycode == KEY_W)
-		move_player(game, 0, -1);
+		move_player(game);
 	else if (keycode == KEY_S)
-		move_player(game, 0, 1);
+		move_player(game);
 	else if (keycode == KEY_A)
-		move_player(game, -1, 0);
+		move_player(game);
 	else if (keycode == KEY_D)
-		move_player(game, 1, 0);
-*/
+		move_player(game);
+
 	draw_rays(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->canvas, 0, 0);
 	return (0);
@@ -103,6 +145,7 @@ int	main(int argc, char **argv)
 	game.precision = 128.0;
 	game.half_fov = M_PI_2 / 3.0;
 	game.player_angle = M_PI_2 / 6.2;
+	game.player_speed = 0.1;
 	game.width = 1024;
 	game.height = 600;
 	game.angle_increment = 2 * game.half_fov / game.width;
