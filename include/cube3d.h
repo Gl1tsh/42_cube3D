@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:49 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/08 16:30:29 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:23:36 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_game
 	double	player_x;
 	double	player_y;
 	double	player_angle;
+	double	player_angle_delta;
 	double	player_speed;
 	double	half_fov;
 	double	precision;
