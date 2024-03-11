@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:16 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/11 18:31:30 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:48:31 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,15 @@ int	load_map(t_map *map, char *path_name)
 	return (0);
 }
 */
+
+int	load_image(t_image *image, char *filename, void *mlx)
+{
+	int		endian;
+
+	image->img = mlx_xpm_file_to_image(mlx, filename, &image->width, &image->height);
+	image->bytes = mlx_get_data_addr(image->img, &image->bpp, &image->line_size, &endian);
+	image->bpp = image->bpp / 8;
+}
 
 int	load_map(t_map *map, char *path_name)
 {
@@ -56,9 +65,9 @@ void	put_pixel(t_game *game, int x, int y, unsigned int color)
 	*(unsigned int *)(game->canvas_bytes + (x * game->canvas_bpp) + (game->canvas_line_size * y)) = color;
 }
 
-unsigned int	get_pixel(t_game *game, int x, int y)
+unsigned int	get_pixel(t_image *image, int x, int y)
 {
-	return (*(unsigned int *)(game->map.north.bytes + (x * game->map.north.bpp) + (game->map.north.line_size * y)));
+	return (*(unsigned int *)(image->bytes + (x * image->bpp) + (image->line_size * y)));
 }
 
 void	draw_vertical_line(t_game *game, int x, int start_y, int end_y, unsigned int color)
@@ -95,15 +104,17 @@ void	draw_wall(t_game *game, int x, int wall_height, double ray_x, double ray_y)
 	int		max_y;
 	int		texture_y;
 	int		texture_x;
+	t_image	*texture;
 
-	texture_x = (int)(game->map.north.width * (ray_x + ray_x)) % game->map.north.width;
-	delta_y = (double)(wall_height * 2) / (double)(game->map.north.height);
+	texture = &game->map.north;
+	texture_x = (int)(texture->width * (ray_x + ray_x)) % texture->width;
+	delta_y = (double)(wall_height * 2) / (double)(texture->height);
 	y = game->height / 2 - wall_height;
 	max_y = game->height / 2 + wall_height;
 	texture_y = 0;
 	while (y < max_y)
 	{
-		draw_vertical_line(game, x, y, y + delta_y, get_pixel(game, texture_x, texture_y));
+		draw_vertical_line(game, x, y, y + delta_y, get_pixel(texture, texture_x, texture_y));
 		y += delta_y;
 		texture_y++;
 	}
@@ -255,9 +266,10 @@ int	main(int argc, char **argv)
 	game.canvas = mlx_new_image(game.mlx, game.width, game.height);
 	game.canvas_bytes = mlx_get_data_addr(game.canvas, &game.canvas_bpp, &game.canvas_line_size, &endian);
 	game.canvas_bpp = game.canvas_bpp / 8;
-	game.map.north.img = mlx_xpm_file_to_image(game.mlx, "assets/japan/east.xpm", &game.map.north.width, &game.map.north.height);
-	game.map.north.bytes = mlx_get_data_addr(game.map.north.img, &game.map.north.bpp, &game.map.north.line_size, &endian);
-	game.map.north.bpp = game.map.north.bpp / 8;
+	load_image(&game.map.north, "assets/japan/north.xpm", game.mlx);
+	load_image(&game.map.south, "assets/japan/south.xpm", game.mlx);
+	load_image(&game.map.east, "assets/japan/east.xpm", game.mlx);
+	load_image(&game.map.west, "assets/japan/west.xpm", game.mlx);
 	mlx_hook(game.win, 17, 0, (void *)game_quit, &game);
 	mlx_hook(game.win, 2, 1L << 0, key_pressed, &game);
 	mlx_hook(game.win, 3, 1L << 1, key_release, &game);
