@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:16 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/08 18:23:26 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/11 15:15:33 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,21 @@ char	map_get_at(t_map *map, int x, int y)
 }
 
 
+void	draw_ceiling(t_game *game, int x, int wall_height)
+{
+	draw_vertical_line(game, x, 0, game->height / 2 - wall_height, game->map.celling_color);
+}
+
+void	draw_wall(t_game *game, int x, int wall_height)
+{
+	draw_vertical_line(game, x, game->height / 2 - wall_height, game->height / 2 + wall_height, game->map.wall_color);
+}
+
+void	draw_floor(t_game *game, int x, int wall_height)
+{
+	draw_vertical_line(game, x, game->height / 2 + wall_height, game->height, game->map.floor_color);
+}
+
 void	draw_rays(t_game *game)
 {
 	int		x;
@@ -101,9 +116,9 @@ void	draw_rays(t_game *game)
 		distance = sqrt(pow(game->player_x  - ray_x, 2.0) + pow(game->player_y - ray_y, 2.0));
 		distance = distance * cos(ray_angle - game->player_angle);
 		wall_height = (double)(game->height) / (1.5 * distance);
-		draw_vertical_line(game, x, 0, game->height / 2 - wall_height, game->map.celling_color);
-		draw_vertical_line(game, x, game->height / 2 - wall_height, game->height / 2 + wall_height, game->map.wall_color);
-		draw_vertical_line(game, x, game->height / 2 + wall_height, game->height, game->map.floor_color);
+		draw_ceiling(game, x, wall_height);
+		draw_wall(game, x, wall_height);
+		draw_floor(game, x, wall_height);
 		ray_angle += game->angle_increment;
 		x++;
 	}
