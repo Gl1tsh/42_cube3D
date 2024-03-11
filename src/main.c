@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:16 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/11 18:48:31 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/11 20:04:53 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	load_image(t_image *image, char *filename, void *mlx)
 	image->img = mlx_xpm_file_to_image(mlx, filename, &image->width, &image->height);
 	image->bytes = mlx_get_data_addr(image->img, &image->bpp, &image->line_size, &endian);
 	image->bpp = image->bpp / 8;
+	return (0);
 }
 
 int	load_map(t_map *map, char *path_name)
@@ -67,6 +68,7 @@ void	put_pixel(t_game *game, int x, int y, unsigned int color)
 
 unsigned int	get_pixel(t_image *image, int x, int y)
 {
+	// printf("x : %d, y : %d\n", x, y);
 	return (*(unsigned int *)(image->bytes + (x * image->bpp) + (image->line_size * y)));
 }
 
@@ -97,17 +99,15 @@ void	draw_ceiling(t_game *game, int x, int wall_height)
 	draw_vertical_line(game, x, 0, game->height / 2 - wall_height, game->map.celling_color);
 }
 
-void	draw_wall(t_game *game, int x, int wall_height, double ray_x, double ray_y)
+void	draw_wall(t_game *game, int x, int wall_height, double ray_x, double ray_y, t_image	*texture)
 {
 	double	delta_y;
 	double	y;
 	int		max_y;
 	int		texture_y;
 	int		texture_x;
-	t_image	*texture;
 
-	texture = &game->map.north;
-	texture_x = (int)(texture->width * (ray_x + ray_x)) % texture->width;
+	texture_x = (int)(texture->width * (ray_x + ray_y)) % texture->width;
 	delta_y = (double)(wall_height * 2) / (double)(texture->height);
 	y = game->height / 2 - wall_height;
 	max_y = game->height / 2 + wall_height;
@@ -136,6 +136,7 @@ void	draw_rays(t_game *game)
 	double	distance;
 	int		wall_height;
 	char	wall;
+	t_image	*texture;
 
 	ray_angle = game->player_angle - game->half_fov;
 
@@ -156,8 +157,17 @@ void	draw_rays(t_game *game)
 		distance = sqrt(pow(game->player_x  - ray_x, 2.0) + pow(game->player_y - ray_y, 2.0));
 		distance = distance * cos(ray_angle - game->player_angle);
 		wall_height = (double)(game->height) / (1.5 * distance);
+		texture = &game->map.north;
+		if (map_get_at(&game->map, ray_x, ray_y - fabs(ray_sin)) == '0')
+			texture = &game->map.north;
+		else if (map_get_at(&game->map, ray_x, ray_y + fabs(ray_sin)) == '0')
+			texture = &game->map.south;
+		else if (map_get_at(&game->map, ray_x + fabs(ray_cos), ray_y) == '0')
+			texture = &game->map.east;
+		else if (map_get_at(&game->map, ray_x - fabs(ray_cos), ray_y) == '0')
+			texture = &game->map.west;
 		draw_ceiling(game, x, wall_height);
-		draw_wall(game, x, wall_height, ray_x, ray_y);
+		draw_wall(game, x, wall_height, ray_x, ray_y, texture);
 		draw_floor(game, x, wall_height);
 		ray_angle += game->angle_increment;
 		x++;
