@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:49 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/11 17:39:40 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:22:53 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,16 @@
 
 # define FPS 60
 
+typedef struct s_image
+{
+	void	*img;
+	int		height;
+	int		width;
+	char	*bytes;
+	int		bpp;
+	int		line_size;
+}	t_image;
+
 typedef struct s_map
 {
 	char			*bytes;
@@ -42,12 +52,10 @@ typedef struct s_map
 	unsigned int	celling_color;
 	unsigned int	floor_color;
 	unsigned int	wall_color;
-	void			*wall_image;
-	int				wall_height;
-	int				wall_width;
-	char			*wall_bytes;
-	int				wall_bpp;
-	int				wall_line_size;
+	t_image			north;
+	t_image			south;
+	t_image			east;
+	t_image			west;
 }	t_map;
 
 typedef struct s_game

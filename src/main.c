@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:16 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/11 18:06:38 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:31:30 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	put_pixel(t_game *game, int x, int y, unsigned int color)
 
 unsigned int	get_pixel(t_game *game, int x, int y)
 {
-	return (*(unsigned int *)(game->map.wall_bytes + (x * game->map.wall_bpp) + (game->map.wall_line_size * y)));
+	return (*(unsigned int *)(game->map.north.bytes + (x * game->map.north.bpp) + (game->map.north.line_size * y)));
 }
 
 void	draw_vertical_line(t_game *game, int x, int start_y, int end_y, unsigned int color)
@@ -96,8 +96,8 @@ void	draw_wall(t_game *game, int x, int wall_height, double ray_x, double ray_y)
 	int		texture_y;
 	int		texture_x;
 
-	texture_x = (int)(game->map.wall_width * (ray_x + ray_x)) % game->map.wall_width;
-	delta_y = (double)(wall_height * 2) / (double)(game->map.wall_height);
+	texture_x = (int)(game->map.north.width * (ray_x + ray_x)) % game->map.north.width;
+	delta_y = (double)(wall_height * 2) / (double)(game->map.north.height);
 	y = game->height / 2 - wall_height;
 	max_y = game->height / 2 + wall_height;
 	texture_y = 0;
@@ -255,9 +255,9 @@ int	main(int argc, char **argv)
 	game.canvas = mlx_new_image(game.mlx, game.width, game.height);
 	game.canvas_bytes = mlx_get_data_addr(game.canvas, &game.canvas_bpp, &game.canvas_line_size, &endian);
 	game.canvas_bpp = game.canvas_bpp / 8;
-	game.map.wall_image = mlx_xpm_file_to_image(game.mlx, "assets/japan/east.xpm", &game.map.wall_width, &game.map.wall_height);
-	game.map.wall_bytes = mlx_get_data_addr(game.map.wall_image, &game.map.wall_bpp, &game.map.wall_line_size, &endian);
-	game.map.wall_bpp = game.map.wall_bpp / 8;
+	game.map.north.img = mlx_xpm_file_to_image(game.mlx, "assets/japan/east.xpm", &game.map.north.width, &game.map.north.height);
+	game.map.north.bytes = mlx_get_data_addr(game.map.north.img, &game.map.north.bpp, &game.map.north.line_size, &endian);
+	game.map.north.bpp = game.map.north.bpp / 8;
 	mlx_hook(game.win, 17, 0, (void *)game_quit, &game);
 	mlx_hook(game.win, 2, 1L << 0, key_pressed, &game);
 	mlx_hook(game.win, 3, 1L << 1, key_release, &game);
