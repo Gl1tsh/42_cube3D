@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:16 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/11 15:15:33 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:06:38 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,20 @@ int	load_map(t_map *map, char *path_name)
 	return (0);
 }
 
+void	put_pixel(t_game *game, int x, int y, unsigned int color)
+{
+	if (y < 0)
+		y = 0;
+	if (y > game->height)
+		y = game->height;
+	*(unsigned int *)(game->canvas_bytes + (x * game->canvas_bpp) + (game->canvas_line_size * y)) = color;
+}
+
+unsigned int	get_pixel(t_game *game, int x, int y)
+{
+	return (*(unsigned int *)(game->map.wall_bytes + (x * game->map.wall_bpp) + (game->map.wall_line_size * y)));
+}
+
 void	draw_vertical_line(t_game *game, int x, int start_y, int end_y, unsigned int color)
 {
 	if (start_y < 0)
@@ -69,15 +83,30 @@ char	map_get_at(t_map *map, int x, int y)
 	return (map->bytes[y * map->width + x]);
 }
 
-
 void	draw_ceiling(t_game *game, int x, int wall_height)
 {
 	draw_vertical_line(game, x, 0, game->height / 2 - wall_height, game->map.celling_color);
 }
 
-void	draw_wall(t_game *game, int x, int wall_height)
+void	draw_wall(t_game *game, int x, int wall_height, double ray_x, double ray_y)
 {
-	draw_vertical_line(game, x, game->height / 2 - wall_height, game->height / 2 + wall_height, game->map.wall_color);
+	double	delta_y;
+	double	y;
+	int		max_y;
+	int		texture_y;
+	int		texture_x;
+
+	texture_x = (int)(game->map.wall_width * (ray_x + ray_x)) % game->map.wall_width;
+	delta_y = (double)(wall_height * 2) / (double)(game->map.wall_height);
+	y = game->height / 2 - wall_height;
+	max_y = game->height / 2 + wall_height;
+	texture_y = 0;
+	while (y < max_y)
+	{
+		draw_vertical_line(game, x, y, y + delta_y, get_pixel(game, texture_x, texture_y));
+		y += delta_y;
+		texture_y++;
+	}
 }
 
 void	draw_floor(t_game *game, int x, int wall_height)
@@ -117,7 +146,7 @@ void	draw_rays(t_game *game)
 		distance = distance * cos(ray_angle - game->player_angle);
 		wall_height = (double)(game->height) / (1.5 * distance);
 		draw_ceiling(game, x, wall_height);
-		draw_wall(game, x, wall_height);
+		draw_wall(game, x, wall_height, ray_x, ray_y);
 		draw_floor(game, x, wall_height);
 		ray_angle += game->angle_increment;
 		x++;
@@ -226,6 +255,9 @@ int	main(int argc, char **argv)
 	game.canvas = mlx_new_image(game.mlx, game.width, game.height);
 	game.canvas_bytes = mlx_get_data_addr(game.canvas, &game.canvas_bpp, &game.canvas_line_size, &endian);
 	game.canvas_bpp = game.canvas_bpp / 8;
+	game.map.wall_image = mlx_xpm_file_to_image(game.mlx, "assets/japan/east.xpm", &game.map.wall_width, &game.map.wall_height);
+	game.map.wall_bytes = mlx_get_data_addr(game.map.wall_image, &game.map.wall_bpp, &game.map.wall_line_size, &endian);
+	game.map.wall_bpp = game.map.wall_bpp / 8;
 	mlx_hook(game.win, 17, 0, (void *)game_quit, &game);
 	mlx_hook(game.win, 2, 1L << 0, key_pressed, &game);
 	mlx_hook(game.win, 3, 1L << 1, key_release, &game);

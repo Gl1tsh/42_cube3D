@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:49 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/08 18:24:45 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:39:40 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@ typedef struct s_map
 	unsigned int	celling_color;
 	unsigned int	floor_color;
 	unsigned int	wall_color;
+	void			*wall_image;
+	int				wall_height;
+	int				wall_width;
+	char			*wall_bytes;
+	int				wall_bpp;
+	int				wall_line_size;
 }	t_map;
 
 typedef struct s_game
