@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:31:50 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/12 17:48:57 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/12 19:53:01 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	move_player(t_game *game, double angle_delta)
 		game->player_x += delta_x;
 		game->player_y += delta_y;
 	}
-	printf("player x : %f player y: %f\n", game->player_x, game->player_y);
 }
 
 void	update(t_game *game)
