@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:16 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/12 17:45:46 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/12 19:38:38 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int	main(int argc, char **argv)
 	load_image(&game.map.south, "assets/japan/south.xpm", game.mlx);
 	load_image(&game.map.east, "assets/japan/east.xpm", game.mlx);
 	load_image(&game.map.west, "assets/japan/west.xpm", game.mlx);
+	load_image(&game.map.floor_img, "assets/japan/floor.xpm", game.mlx);
+	load_image(&game.map.ceiling_img, "assets/japan/ceiling.xpm", game.mlx);
 	mlx_hook(game.win, 17, 0, (void *)game_quit, &game);
 	mlx_hook(game.win, 2, 1L << 0, key_pressed, &game);
 	mlx_hook(game.win, 3, 1L << 1, key_release, &game);

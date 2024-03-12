@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:49 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/12 17:49:13 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/12 19:51:33 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct s_map
 	unsigned int	celling_color;
 	unsigned int	floor_color;
 	unsigned int	wall_color;
+	t_image			ceiling_img;
+	t_image			floor_img;
 	t_image			north;
 	t_image			south;
 	t_image			east;
@@ -82,6 +84,20 @@ typedef struct s_game
 	char	keys[256];
 }	t_game;
 
+typedef struct s_ray
+{
+	double	angle;
+	double	x;
+	double	y;
+	double	cos;
+	double	sin;
+	double	distance;
+	int		wall_height;
+	double	direction_cos;
+	double	direction_sin;
+	double	fisheye_corr;
+}	t_ray;
+
 // free or quit game
 void			game_quit_error(t_game *game, const char *error_msg);
 void			game_quit(t_game *game);
@@ -98,6 +114,10 @@ char			map_get_at(t_map *map, int x, int y);
 
 // draw
 void			draw_rays(t_game *game);
+void			draw_floor(t_game *game, int x, t_ray *ray);
+void			draw_ceiling(t_game *game, int x, t_ray *ray);
+void			draw_wall(t_game *game, int x, t_ray *ray, t_image *texture);
+
 
 // game
 int				game_loop(t_game *game);
