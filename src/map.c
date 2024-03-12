@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:33:31 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/12 17:45:31 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/12 20:02:31 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	load_map(t_map *map, char *path_name)
 {
+	(void)path_name;
 	map->width = 8;
 	map->height = 8;
 	map->bytes = malloc(map->width * map->height);

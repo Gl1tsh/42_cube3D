@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:16 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/12 19:38:38 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/12 20:02:04 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	key_release(int keycode, t_game *game)
 
 int	main(int argc, char **argv)
 {
+	(void)argc;
 	t_game	game;
 	int		endian;
 
@@ -47,8 +48,8 @@ int	main(int argc, char **argv)
 	game.player_angle = M_PI_2;
 	game.player_speed = 0.05;
 	game.player_angle_delta = 0.05;
-	game.width = 1024;
-	game.height = 600;
+	game.width = 1200;
+	game.height = 720;
 	game.frame_delay = 1000 / FPS;
 	game.angle_increment = 2 * game.half_fov / game.width;
 	ft_memset(game.keys, 0, 256);
