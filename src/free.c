@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 15:54:13 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/06 16:13:36 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:45:08 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	game_free(t_game *game)
 {
 	if (game->win != NULL)
 		mlx_destroy_window(game->mlx, game->win);
-	// if (game->map->bytes)
-	// 	free(game->map->bytes);
 }
 
 void	game_quit(t_game *game)

@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:49 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/11 18:22:53 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:49:13 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,23 @@ typedef struct s_game
 }	t_game;
 
 // free or quit game
-void	game_quit_error(t_game *game, const char *error_msg);
-void	game_quit(t_game *game);
-void	game_free(t_game *game);
+void			game_quit_error(t_game *game, const char *error_msg);
+void			game_quit(t_game *game);
+void			game_free(t_game *game);
+
+// utils
+long			get_timestamp_ms(void);
+void			put_pixel(t_game *game, int x, int y, unsigned int color);
+unsigned int	get_pixel(t_image *image, int x, int y);
+
+// map
+int				load_map(t_map *map, char *path_name);
+char			map_get_at(t_map *map, int x, int y);
+
+// draw
+void			draw_rays(t_game *game);
+
+// game
+int				game_loop(t_game *game);
 
 #endif
