@@ -6,11 +6,22 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:27:16 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/12 17:46:13 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/12 18:02:31 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
+typedef struct s_ray
+{
+	double	angle;
+	double	x;
+	double	y;
+	double	cos;
+	double	sin;
+	double	distance;
+	int		wall_height;
+}	t_ray;
 
 void	draw_vertical_line(t_game *game, int x, int start_y, int end_y, unsigned int color)
 {
@@ -58,48 +69,42 @@ void	draw_floor(t_game *game, int x, int wall_height)
 
 void	draw_rays(t_game *game)
 {
+	t_ray	ray;
 	int		x;
-	double	ray_angle;
-	double	ray_x;
-	double	ray_y;
-	double	ray_cos;
-	double	ray_sin;
-	double	distance;
-	int		wall_height;
 	char	wall;
 	t_image	*texture;
 
-	ray_angle = game->player_angle - game->half_fov;
+	ray.angle = game->player_angle - game->half_fov;
 	x = 0;
 	while (x < game->width)
 	{
-		ray_x = game->player_x;
-		ray_y = game->player_y;
-		ray_cos = cos(ray_angle) / game->precision;
-		ray_sin = sin(ray_angle) / game->precision;
+		ray.x = game->player_x;
+		ray.y = game->player_y;
+		ray.cos = cos(ray.angle) / game->precision;
+		ray.sin = sin(ray.angle) / game->precision;
 		wall = '0';
 		while (wall == '0')
 		{
-			ray_x += ray_cos;
-			ray_y += ray_sin;
-			wall = map_get_at(&game->map, ray_x, ray_y);
+			ray.x += ray.cos;
+			ray.y += ray.sin;
+			wall = map_get_at(&game->map, ray.x, ray.y);
 		}
-		distance = sqrt(pow(game->player_x - ray_x, 2.0) + pow(game->player_y - ray_y, 2.0));
-		distance = distance * cos(ray_angle - game->player_angle);
-		wall_height = (double)(game->height) / (1.5 * distance);
+		ray.distance = sqrt(pow(game->player_x - ray.x, 2.0) + pow(game->player_y - ray.y, 2.0));
+		ray.distance = ray.distance * cos(ray.angle - game->player_angle);
+		ray.wall_height = (double)(game->height) / (1.5 * ray.distance);
 		texture = &game->map.north;
-		if (map_get_at(&game->map, ray_x, ray_y - fabs(ray_sin)) == '0')
+		if (map_get_at(&game->map, ray.x, ray.y - fabs(ray.sin)) == '0')
 			texture = &game->map.north;
-		else if (map_get_at(&game->map, ray_x, ray_y + fabs(ray_sin)) == '0')
+		else if (map_get_at(&game->map, ray.x, ray.y + fabs(ray.sin)) == '0')
 			texture = &game->map.south;
-		else if (map_get_at(&game->map, ray_x + fabs(ray_cos), ray_y) == '0')
+		else if (map_get_at(&game->map, ray.x + fabs(ray.cos), ray.y) == '0')
 			texture = &game->map.east;
-		else if (map_get_at(&game->map, ray_x - fabs(ray_cos), ray_y) == '0')
+		else if (map_get_at(&game->map, ray.x - fabs(ray.cos), ray.y) == '0')
 			texture = &game->map.west;
-		draw_ceiling(game, x, wall_height);
-		draw_wall(game, x, wall_height, ray_x, ray_y, texture);
-		draw_floor(game, x, wall_height);
-		ray_angle += game->angle_increment;
+		draw_ceiling(game, x, ray.wall_height);
+		draw_wall(game, x, ray.wall_height, ray.x, ray.y, texture);
+		draw_floor(game, x, ray.wall_height);
+		ray.angle += game->angle_increment;
 		x++;
 	}
 }
