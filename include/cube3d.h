@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:49 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/12 20:13:53 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/15 15:32:17 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 //bonus
-#include <string.h>
+# include <string.h>
 # include <sys/errno.h>
 # include <math.h>
 
@@ -119,7 +119,6 @@ void			draw_rays(t_game *game);
 void			draw_floor(t_game *game, int x, t_ray *ray);
 void			draw_ceiling(t_game *game, int x, t_ray *ray);
 void			draw_wall(t_game *game, int x, t_ray *ray, t_image *texture);
-
 
 // game
 int				game_loop(t_game *game);

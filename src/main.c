@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:16 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/12 20:02:04 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/15 15:28:33 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,19 @@ int	load_image(t_image *image, char *filename, void *mlx)
 	image->img = mlx_xpm_file_to_image(mlx, filename, &image->width, &image->height);
 	image->bytes = mlx_get_data_addr(image->img, &image->bpp, &image->line_size, &endian);
 	image->bpp = image->bpp / 8;
+	return (0);
+}
+
+int	load_color(t_image *image, unsigned int color, void *mlx)
+{
+	int		endian;
+
+	image->width = 1;
+	image->height = 1;
+	image->img = mlx_new_image(mlx, image->width, image->height);
+	image->bytes = mlx_get_data_addr(image->img, &image->bpp, &image->line_size, &endian);
+	image->bpp = image->bpp / 8;
+	*(unsigned int *)(image->bytes) = color;
 	return (0);
 }
 
@@ -48,8 +61,8 @@ int	main(int argc, char **argv)
 	game.player_angle = M_PI_2;
 	game.player_speed = 0.05;
 	game.player_angle_delta = 0.05;
-	game.width = 1200;
-	game.height = 720;
+	game.width = 800;
+	game.height = 400;
 	game.frame_delay = 1000 / FPS;
 	game.angle_increment = 2 * game.half_fov / game.width;
 	ft_memset(game.keys, 0, 256);
@@ -71,7 +84,8 @@ int	main(int argc, char **argv)
 	load_image(&game.map.east, "assets/japan/east.xpm", game.mlx);
 	load_image(&game.map.west, "assets/japan/west.xpm", game.mlx);
 	load_image(&game.map.floor_img, "assets/japan/floor.xpm", game.mlx);
-	load_image(&game.map.ceiling_img, "assets/japan/ceiling.xpm", game.mlx);
+	// load_image(&game.map.ceiling_img, "assets/japan/ceiling.xpm", game.mlx);
+	load_color(&game.map.ceiling_img, 0x00ff0000, game.mlx);
 	mlx_hook(game.win, 17, 0, (void *)game_quit, &game);
 	mlx_hook(game.win, 2, 1L << 0, key_pressed, &game);
 	mlx_hook(game.win, 3, 1L << 1, key_release, &game);
