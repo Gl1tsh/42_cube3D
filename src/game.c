@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:31:50 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/15 17:54:42 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/15 18:52:57 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	draw_fps(t_game *game, int now)
 int	game_loop(t_game *game)
 {
 	long		now;
+	t_image		*katana_img;
 
 	now = get_timestamp_ms();
 	if (game->display_menu)
@@ -72,6 +73,9 @@ int	game_loop(t_game *game)
 		update(game);
 		draw_rays(game);
 		mlx_put_image_to_window(game->mlx, game->win, game->canvas, 0, 0);
+		katana_img = &game->katana_imgs[game->katana_index / 5];
+		mlx_put_image_to_window(game->mlx, game->win, katana_img->img, (game->width - katana_img->width) / 2, (game->height - katana_img->height));
+		game->katana_index = (game->katana_index + 1) % (6 * 5);
 		draw_fps(game, now);
 		game->next_frame_ts = now + game->frame_delay;
 	}
