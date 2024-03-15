@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:49 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/15 15:32:17 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/15 17:34:52 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
 # define KEY_ESC 53
+# define KEY_ENTER 36
 
 # define FPS 60
 
@@ -84,6 +85,10 @@ typedef struct s_game
 	long	next_frame_ts;
 	long	frame_delay;
 	char	keys[256];
+	int		display_menu;
+	t_image		menu1_img;
+	t_image		menu2_img;
+	t_image		menuv_img;
 }	t_game;
 
 typedef struct s_ray
@@ -122,5 +127,6 @@ void			draw_wall(t_game *game, int x, t_ray *ray, t_image *texture);
 
 // game
 int				game_loop(t_game *game);
+int 			menu_loop(t_game *game, long now);
 
 #endif
