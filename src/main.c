@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:16 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/18 16:43:47 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:23:10 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,20 +79,15 @@ int	main(int argc, char **argv)
 	game.canvas = mlx_new_image(game.mlx, game.width, game.height);
 	game.canvas_bytes = mlx_get_data_addr(game.canvas, &game.canvas_bpp, &game.canvas_line_size, &endian);
 	game.canvas_bpp = game.canvas_bpp / 8;
-	
-	game.katana.current_i = 0;
-	game.katana.count = 6;
-	game.katana.next_frame_ts = 0;
-	game.katana.pause_duration = 750;
-	game.katana.frame_duration = 200;
-	game.katana.sprites = malloc(sizeof(t_anim) * game.katana.count);
-	load_image(&game.katana.sprites[0], "assets/katana/katana_new_1.xpm", game.mlx);
-	load_image(&game.katana.sprites[1], "assets/katana/katana_new_2.xpm", game.mlx);
-	load_image(&game.katana.sprites[2], "assets/katana/katana_new_4.xpm", game.mlx);
-	load_image(&game.katana.sprites[3], "assets/katana/katana_new_3.xpm", game.mlx);
-	load_image(&game.katana.sprites[4], "assets/katana/katana_new_4.xpm", game.mlx);
-	load_image(&game.katana.sprites[5], "assets/katana/katana_new_2.xpm", game.mlx);
 
+	load_anim(&game.katana, 750, 200, (char *[7]) {
+		"assets/katana/katana_new_1.xpm",
+		"assets/katana/katana_new_2.xpm",
+		"assets/katana/katana_new_3.xpm",
+		"assets/katana/katana_new_4.xpm",
+		"assets/katana/katana_new_3.xpm",
+		"assets/katana/katana_new_2.xpm",
+			NULL}, game.mlx);
 	load_image(&game.map.north, "assets/japan/north.xpm", game.mlx);
 	load_image(&game.map.south, "assets/japan/south.xpm", game.mlx);
 	load_image(&game.map.east, "assets/japan/east.xpm", game.mlx);

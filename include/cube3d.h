@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:49 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/18 16:30:28 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:25:57 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,27 +77,27 @@ typedef struct s_map
 
 typedef struct s_game
 {
-	void	*mlx;
-	void	*win;
-	t_map	map;
-	int		width;
-	int		height;
-	void	*canvas;
-	char	*canvas_bytes;
-	int		canvas_bpp;
-	int		canvas_line_size;
-	double	player_x;
-	double	player_y;
-	double	player_angle;
-	double	player_angle_delta;
-	double	player_speed;
-	double	half_fov;
-	double	precision;
-	double	angle_increment;
-	long	next_frame_ts;
-	long	frame_delay;
-	char	keys[256];
-	int		display_menu;
+	void		*mlx;
+	void		*win;
+	t_map		map;
+	int			width;
+	int			height;
+	void		*canvas;
+	char		*canvas_bytes;
+	int			canvas_bpp;
+	int			canvas_line_size;
+	double		player_x;
+	double		player_y;
+	double		player_angle;
+	double		player_angle_delta;
+	double		player_speed;
+	double		half_fov;
+	double		precision;
+	double		angle_increment;
+	long		next_frame_ts;
+	long		frame_delay;
+	char		keys[256];
+	int			display_menu;
 	t_image		menu1_img;
 	t_image		menu2_img;
 	t_image		menuv_img;
@@ -140,11 +140,19 @@ void			draw_wall(t_game *game, int x, t_ray *ray, t_image *texture);
 
 // game
 int				game_loop(t_game *game);
-int 			menu_loop(t_game *game, long now);
+int				menu_loop(t_game *game, long now);
 
 // player
 void			rotate_player(t_game *game, double sign);
 void			move_player(t_game *game, double angle_delta);
 void			update_player(t_game *game);
+
+// anim
+void			update_anim(t_anim *anim, long now);
+void			load_anim(t_anim *anim, int pause_duration, int frame_duration,
+					char **filenames, void *mlx);
+
+// autre
+int				load_image(t_image *image, char *filename, void *mlx);
 
 #endif
