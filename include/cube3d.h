@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:49 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/18 17:37:46 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/18 18:52:39 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,18 @@ typedef struct s_anim
 
 }	t_anim;
 
+typedef struct s_minimap
+{
+	int				width;
+	int				height;
+	int				item_size;
+	int				player_size;
+	unsigned int	floor_color;
+	unsigned int	wall_color;
+	unsigned int	player_color;
+	t_image			image;
+}	t_minimap;
+
 typedef struct s_map
 {
 	char			*bytes;
@@ -64,9 +76,6 @@ typedef struct s_map
 	int				height;
 	int				player_x;
 	int				player_y;
-	unsigned int	celling_color;
-	unsigned int	floor_color;
-	unsigned int	wall_color;
 	t_image			ceiling_img;
 	t_image			floor_img;
 	t_anim			north;
@@ -82,10 +91,6 @@ typedef struct s_game
 	t_map		map;
 	int			width;
 	int			height;
-	void		*canvas;
-	char		*canvas_bytes;
-	int			canvas_bpp;
-	int			canvas_line_size;
 	double		player_x;
 	double		player_y;
 	double		player_angle;
@@ -101,7 +106,9 @@ typedef struct s_game
 	t_image		menu1_img;
 	t_image		menu2_img;
 	t_image		menuv_img;
+	t_image		canvas;
 	t_anim		katana;
+	t_minimap	minimap;
 }	t_game;
 
 typedef struct s_ray
@@ -125,7 +132,7 @@ void			game_free(t_game *game);
 
 // utils
 long			get_timestamp_ms(void);
-void			put_pixel(t_game *game, int x, int y, unsigned int color);
+void			put_pixel(t_image *image, int x, int y, unsigned int color);
 unsigned int	get_pixel(t_image *image, int x, int y);
 
 // map
@@ -152,7 +159,14 @@ void			update_anim(t_anim *anim, long now);
 void			load_anim(t_anim *anim, int pause_duration, int frame_duration,
 					char **filenames, void *mlx);
 
-// autre
+// image
 int				load_image(t_image *image, char *filename, void *mlx);
+int				create_image(t_image *image, int width, int height, void *mlx);
+
+// minimap
+void			init_minimap(t_minimap *minimap, void *mlx);
+void			draw_minimap(t_minimap *minimap, t_game *game);
+
+
 
 #endif

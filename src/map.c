@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:33:31 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/12 20:02:31 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/18 18:20:26 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,6 @@ int	load_map(t_map *map, char *path_name)
     close(fd);
 	map->player_x = 3;
 	map->player_y = 1;
-	map->celling_color = 0x00aaaaff;
-	map->floor_color = 0x00608060;
-	map->wall_color = 0x00804000;
 	return (0);
 }
 

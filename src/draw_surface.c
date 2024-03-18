@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:48:36 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/13 05:19:49 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/18 18:58:42 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ typedef struct s_coord
 	int	y;
 }	t_coord;
 
-void	draw_vertical_line(t_game *game, t_coord *start,
+void	draw_vertical_line(t_image *image, t_coord *start,
 	int end_y, unsigned int color)
 {
 	if (start->y < 0)
 		start->y = 0;
-	if (end_y > game->height)
-		end_y = game->height;
+	if (end_y > image->height)
+		end_y = image->height;
 	while (start->y < end_y)
 	{
-		*(unsigned int *)(game->canvas_bytes + (start->x * game->canvas_bpp)
-				+ (game->canvas_line_size * start->y)) = color;
+		*(unsigned int *)(image->bytes + (start->x * image->bpp)
+				+ (image->line_size * start->y)) = color;
 		start->y++;
 	}
 }
@@ -53,7 +53,7 @@ void	draw_floor(t_game *game, int x, t_ray *ray)
 			% game->map.floor_img.width;
 		texture.y = (int)(tile_y * game->map.floor_img.height)
 			% game->map.floor_img.height;
-		put_pixel(game, x, y,
+		put_pixel(&game->canvas, x, y,
 			get_pixel(&game->map.floor_img, texture.x, texture.y));
 		y++;
 	}
@@ -79,7 +79,7 @@ void	draw_ceiling(t_game *game, int x, t_ray *ray)
 			% game->map.ceiling_img.width;
 		texture.y = (int)(tile_y * game->map.ceiling_img.height)
 			% game->map.ceiling_img.height;
-		put_pixel(game, x, y,
+		put_pixel(&game->canvas, x, y,
 			get_pixel(&game->map.ceiling_img, texture.x, texture.y));
 		y--;
 	}
@@ -102,7 +102,7 @@ void	draw_wall(t_game *game, int x, t_ray *ray, t_image *texture)
 	{
 		line_start.x = x;
 		line_start.y = y;
-		draw_vertical_line(game, &line_start, y + delta_y,
+		draw_vertical_line(&game->canvas, &line_start, y + delta_y,
 			get_pixel(texture, tex_coord.x, tex_coord.y));
 		y += delta_y;
 		tex_coord.y++;

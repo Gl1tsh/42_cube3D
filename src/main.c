@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:16 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/18 17:51:51 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/18 18:56:54 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,6 @@
 #include <string.h>
 
 #define ft_memset memset
-
-int	load_image(t_image *image, char *filename, void *mlx)
-{
-	int		endian;
-
-	image->img = mlx_xpm_file_to_image(mlx, filename, &image->width, &image->height);
-	image->bytes = mlx_get_data_addr(image->img, &image->bpp, &image->line_size, &endian);
-	image->bpp = image->bpp / 8;
-	return (0);
-}
 
 int	load_color(t_image *image, unsigned int color, void *mlx)
 {
@@ -76,9 +66,7 @@ int	main(int argc, char **argv)
 	game.win = mlx_new_window(game.mlx, game.width, game.height, "cub3d");
 	if (game.win == NULL)
 		game_quit_error(&game, "erreur game window");
-	game.canvas = mlx_new_image(game.mlx, game.width, game.height);
-	game.canvas_bytes = mlx_get_data_addr(game.canvas, &game.canvas_bpp, &game.canvas_line_size, &endian);
-	game.canvas_bpp = game.canvas_bpp / 8;
+	create_image(&game.canvas, game.width, game.height, game.mlx);
 
 	load_anim(&game.katana, 750, 200, (char *[7]) {
 		"assets/katana/katana_new_1.xpm",
@@ -102,6 +90,8 @@ int	main(int argc, char **argv)
 	load_anim(&game.map.west, 0, 100000, (char *[2]) {
 		"assets/japan/west.xpm",
 			NULL}, game.mlx);
+
+	init_minimap(&game.minimap, game.mlx);
 
 	load_image(&game.map.floor_img, "assets/japan/floor.xpm", game.mlx);
 	load_image(&game.map.ceiling_img, "assets/japan/ceiling.xpm", game.mlx);
