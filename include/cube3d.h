@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:49 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/15 18:51:55 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/18 16:30:28 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,18 @@ typedef struct s_image
 	int		bpp;
 	int		line_size;
 }	t_image;
+
+typedef struct s_anim
+{
+	int			count;
+	int			pause_duration;
+	int			frame_duration;
+	int			current_i;
+	long		next_frame_ts;
+	t_image		*current;
+	t_image		*sprites;
+
+}	t_anim;
 
 typedef struct s_map
 {
@@ -89,8 +101,7 @@ typedef struct s_game
 	t_image		menu1_img;
 	t_image		menu2_img;
 	t_image		menuv_img;
-	t_image		katana_imgs[6];
-	int			katana_index;
+	t_anim		katana;
 }	t_game;
 
 typedef struct s_ray
@@ -130,5 +141,10 @@ void			draw_wall(t_game *game, int x, t_ray *ray, t_image *texture);
 // game
 int				game_loop(t_game *game);
 int 			menu_loop(t_game *game, long now);
+
+// player
+void			rotate_player(t_game *game, double sign);
+void			move_player(t_game *game, double angle_delta);
+void			update_player(t_game *game);
 
 #endif
