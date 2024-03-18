@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:27:16 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/12 19:52:30 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:40:06 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ void	compute_ray(t_game *game, t_ray *ray)
 t_image	*select_texture(t_game *game, t_ray *ray)
 {
 	if (map_get_at(&game->map, ray->x, ray->y - fabs(ray->sin)) == '0')
-		return (&game->map.north);
+		return (game->map.north.current);
 	else if (map_get_at(&game->map, ray->x, ray->y + fabs(ray->sin)) == '0')
-		return (&game->map.south);
+		return (game->map.south.current);
 	else if (map_get_at(&game->map, ray->x + fabs(ray->cos), ray->y) == '0')
-		return (&game->map.east);
+		return (game->map.east.current);
 	else if (map_get_at(&game->map, ray->x - fabs(ray->cos), ray->y) == '0')
-		return (&game->map.west);
-	return (&game->map.north);
+		return (game->map.west.current);
+	return (game->map.north.current);
 }
 
 void	draw_rays(t_game *game)

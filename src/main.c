@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:16 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/18 17:23:10 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:51:51 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,21 @@ int	main(int argc, char **argv)
 		"assets/katana/katana_new_3.xpm",
 		"assets/katana/katana_new_2.xpm",
 			NULL}, game.mlx);
-	load_image(&game.map.north, "assets/japan/north.xpm", game.mlx);
-	load_image(&game.map.south, "assets/japan/south.xpm", game.mlx);
-	load_image(&game.map.east, "assets/japan/east.xpm", game.mlx);
-	load_image(&game.map.west, "assets/japan/west.xpm", game.mlx);
+
+	load_anim(&game.map.north, 0, 100000, (char *[2]) {
+		"assets/japan/north.xpm",
+			NULL}, game.mlx);
+	load_anim(&game.map.south, 0, 100000, (char *[2]) {
+		"assets/japan/south.xpm",
+			NULL}, game.mlx);
+	load_anim(&game.map.east, 0, 100, (char *[3]) {
+		"assets/japan/east.xpm",
+		"assets/japan/west.xpm",
+			NULL}, game.mlx);
+	load_anim(&game.map.west, 0, 100000, (char *[2]) {
+		"assets/japan/west.xpm",
+			NULL}, game.mlx);
+
 	load_image(&game.map.floor_img, "assets/japan/floor.xpm", game.mlx);
 	load_image(&game.map.ceiling_img, "assets/japan/ceiling.xpm", game.mlx);
 	//load_color(&game.map.ceiling_img, 0x00ff0000, game.mlx);
