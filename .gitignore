@@ -32,4 +32,5 @@ libft/*.o
 minilibx/*.a
 libft/*.a
 cub3D
+.vscode
 
