@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:49 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/18 18:52:39 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/18 19:14:51 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,5 @@ int				create_image(t_image *image, int width, int height, void *mlx);
 // minimap
 void			init_minimap(t_minimap *minimap, void *mlx);
 void			draw_minimap(t_minimap *minimap, t_game *game);
-
-
 
 #endif

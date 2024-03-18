@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:56:10 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/18 19:08:54 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/18 19:12:55 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	draw_square(t_minimap *minimap, int x, int y, unsigned int color)
 
 void	draw_minimap(t_minimap *minimap, t_game *game)
 {
-	// dessine un carre
 	draw_square(minimap, 0, 0, minimap->floor_color);
 	mlx_put_image_to_window(game->mlx, game->win, minimap->image.img, 10, 10);
 }
