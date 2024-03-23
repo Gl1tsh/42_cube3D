@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:33:31 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/18 18:20:26 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/23 21:08:20 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 int	load_map(t_map *map, char *path_name)
 {
 	(void)path_name;
-	map->width = 8;
+	map->width = 22;
 	map->height = 8;
 	map->bytes = malloc(map->width * map->height);
-	int fd = open("maps/map1.txt", O_RDONLY);
+	int fd = open("maps/map4.txt", O_RDONLY);
     read(fd, map->bytes, map->width * map->height);
     close(fd);
 	map->player_x = 3;
