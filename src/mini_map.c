@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:56:10 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/26 18:12:38 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/26 18:36:40 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,36 +46,45 @@ void	draw_square(t_minimap *minimap, int x, int y, unsigned int color)
 	}
 }
 
+void	draw_player(t_minimap *minimap, t_game *game)
+{
+	int	x;
+	int	y;
+
+	x = minimap->half_width * minimap->item_size;
+	y = minimap->half_height * minimap->item_size;
+	put_pixel(&minimap->image, x, y, minimap->player_color);
+	put_pixel(&minimap->image, x, y - 1, minimap->player_color);
+	put_pixel(&minimap->image, x, y + 1, minimap->player_color);
+	put_pixel(&minimap->image, x - 1, y, minimap->player_color);
+	put_pixel(&minimap->image, x + 1, y, minimap->player_color);
+	mlx_put_image_to_window(game->mlx, game->win, minimap->image.img, 10, 10);
+}
+
 void	draw_minimap(t_minimap *minimap, t_game *game)
 {
 	int				x;
 	int				y;
 	int				x_offset;
 	int				y_offset;
-	unsigned int	color;
 	double			dummy;
 
 	x_offset = modf(game->player_x, &dummy) * minimap->item_size;
 	y_offset = modf(game->player_y, &dummy) * minimap->item_size;
-	x = -minimap->half_width;
-	while (x <= minimap->half_width)
+	x = -minimap->half_width - 1;
+	while (++x <= minimap->half_width)
 	{
-		y = -minimap->half_height;
-		while (y <= minimap->half_height)
-		{
-			if (map_get_at(&game->map, x + game->player_x, y + game->player_y) == '0')
-				color = minimap->floor_color;
-			else
-				color = minimap->wall_color;
-			draw_square(minimap, (x + minimap->half_width) * minimap->item_size - x_offset, (y + minimap->half_height) * minimap->item_size - y_offset, color);
-			y++;
-		}
-		x++;
+		y = -minimap->half_height - 1;
+		while (++y <= minimap->half_height)
+			if (map_get_at(&game->map, x + game->player_x, y
+					+ game->player_y) == '0')
+				draw_square(minimap, (x + minimap->half_width)
+					* minimap->item_size - x_offset, (y + minimap->half_height)
+					* minimap->item_size - y_offset, minimap->floor_color);
+		else
+			draw_square(minimap, (x + minimap->half_width)
+				* minimap->item_size - x_offset, (y + minimap->half_height)
+				* minimap->item_size - y_offset, minimap->wall_color);
 	}
-	put_pixel(&minimap->image, (minimap->half_width) * minimap->item_size, (minimap->half_height) * minimap->item_size, minimap->player_color);
-	put_pixel(&minimap->image, (minimap->half_width) * minimap->item_size, (minimap->half_height) * minimap->item_size + 1, minimap->player_color);
-	put_pixel(&minimap->image, (minimap->half_width) * minimap->item_size, (minimap->half_height) * minimap->item_size - 1, minimap->player_color);
-	put_pixel(&minimap->image, (minimap->half_width) * minimap->item_size + 1, (minimap->half_height) * minimap->item_size, minimap->player_color);
-	put_pixel(&minimap->image, (minimap->half_width) * minimap->item_size - 1, (minimap->half_height) * minimap->item_size, minimap->player_color);
-	mlx_put_image_to_window(game->mlx, game->win, minimap->image.img, 10, 10);
+	draw_player(minimap, game);
 }
