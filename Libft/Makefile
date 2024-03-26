@@ -6,7 +6,7 @@
 #    By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/03 19:39:17 by nagiorgi          #+#    #+#              #
-#    Updated: 2024/03/26 19:18:51 by nagiorgi         ###   ########.fr        #
+#    Updated: 2024/03/26 21:12:03 by nagiorgi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRCS = 	ft_atoi.c \
 		ft_striteri.c \
 		ft_strmapi.c \
 		ft_strndup.c \
+		ft_strcmp.c \
 		get_next_line.c \
 
 SRCS_BONUS = 		ft_lstnew.c \

@@ -116,6 +116,8 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_strndup(const char *str, size_t n);
+int		ft_strcmp(char *s1, char *s2);
+
 
 
 /*
