@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:49 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/26 20:19:21 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/26 20:54:57 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # include <string.h>
 # include <sys/errno.h>
 # include <math.h>
+
+# define WHITESPACE_CHARSET " \t\n\v\f\r"
 
 # define KEY_W 13
 # define KEY_S 1
@@ -136,6 +138,7 @@ void			game_free(t_game *game);
 long			get_timestamp_ms(void);
 void			put_pixel(t_image *image, int x, int y, unsigned int color);
 unsigned int	get_pixel(t_image *image, int x, int y);
+int				is_empty_line(char *line);
 
 // map
 int				load_map(t_map *map, char *path_name);
