@@ -6,14 +6,14 @@
 #    By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 15:13:34 by nagiorgi          #+#    #+#              #
-#    Updated: 2024/03/26 19:11:54 by nagiorgi         ###   ########.fr        #
+#    Updated: 2024/03/26 20:22:53 by nagiorgi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 
 CC = gcc
-FLAGS = -Wall -Wextra -I./include -I./minilibx -g
+FLAGS = -Wall -Wextra -I./include -I./minilibx -I./libft -g
 #FLAGS = -Wall -Wextra -I./include -I./minilibx -g
 MLXDIR = ./minilibx
 LIBFTDIR = ./Libft
@@ -28,9 +28,9 @@ OBJS = $(patsubst $(SRCDIR)%.c,$(OBJDIR)%.o,$(SRCS))
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@make -C $(LIBFTDIR)
+	@make -C $(LIBFTDIR) 
 	@make -C $(MLXDIR) > /dev/null 2>&1
-	@$(CC) -o $@ $^ $(FLAGS) $(INCMLX)
+	@$(CC) -o $@ $^ $(FLAGS) $(INCMLX) -L$(LIBFTDIR) -lft
 	@echo "\033[0;32mCompilation réussie ! Le jeu est prêt à être joué.\033[0m"
 
 $(OBJDIR)%.o: $(SRCDIR)%.c

@@ -1,3 +1,11 @@
+NO assets/japan/north.xpm
+SO assets/japan/south.xpm
+WE assets/japan/west.xpm
+EA assets/japan/east.xpm
+
+F 80,50,0
+C 0,50,128
+
 111111111111111111111
 100000100000000000001
 100000100000000000001

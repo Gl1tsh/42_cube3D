@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:16 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/18 18:56:54 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/26 18:40:38 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ int	main(int argc, char **argv)
 	game.player_angle = M_PI_2;
 	game.player_speed = 0.05;
 	game.player_angle_delta = 0.05;
-	game.width = 1280;
-	game.height = 740;
+	game.width = 1024;
+	game.height = 640;
 	game.frame_delay = 1000 / FPS;
 	game.angle_increment = 2 * game.half_fov / game.width;
 	ft_memset(game.keys, 0, 256);
