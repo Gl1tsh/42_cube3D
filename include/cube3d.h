@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:49 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/18 19:14:51 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/26 17:37:40 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ typedef struct s_anim
 
 typedef struct s_minimap
 {
-	int				width;
-	int				height;
+	int				half_width;
+	int				half_height;
 	int				item_size;
 	int				player_size;
 	unsigned int	floor_color;
