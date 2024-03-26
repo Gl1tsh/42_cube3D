@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 19:20:03 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/26 21:27:14 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/26 21:38:55 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ int	parse_texture(t_game *game, char *line)
 		load_anim(&game->map.west, 0, 100000, parts + 1, game->mlx);
 	if (ft_strcmp(parts[0], "EA") == 0)
 		load_anim(&game->map.east, 0, 100000, parts + 1, game->mlx);
+	if (ft_strcmp(parts[0], "F") == 0)
+		load_anim(&game->map.floor, 0, 100000, parts + 1, game->mlx);
+	if (ft_strcmp(parts[0], "C") == 0)
+		load_anim(&game->map.ceiling, 0, 100000, parts + 1, game->mlx);
+
 	i = 0;
 	while (parts[i] != NULL)
 		free(parts[i++]);

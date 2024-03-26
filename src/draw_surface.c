@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:48:36 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/18 18:58:42 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/26 21:37:16 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ void	draw_floor(t_game *game, int x, t_ray *ray)
 		distance *= 1.296875;
 		tile_x = game->player_x + distance * ray->direction_cos;
 		tile_y = game->player_y + distance * ray->direction_sin;
-		texture.x = (int)(tile_x * game->map.floor_img.width)
-			% game->map.floor_img.width;
-		texture.y = (int)(tile_y * game->map.floor_img.height)
-			% game->map.floor_img.height;
+		texture.x = (int)(tile_x * game->map.floor.current->width)
+			% game->map.floor.current->width;
+		texture.y = (int)(tile_y * game->map.floor.current->height)
+			% game->map.floor.current->height;
 		put_pixel(&game->canvas, x, y,
-			get_pixel(&game->map.floor_img, texture.x, texture.y));
+			get_pixel(game->map.floor.current, texture.x, texture.y));
 		y++;
 	}
 }
@@ -75,12 +75,12 @@ void	draw_ceiling(t_game *game, int x, t_ray *ray)
 		distance *= 1.296875;
 		tile_x = game->player_x + distance * ray->direction_cos;
 		tile_y = game->player_y + distance * ray->direction_sin;
-		texture.x = (int)(tile_x * game->map.ceiling_img.width)
-			% game->map.ceiling_img.width;
-		texture.y = (int)(tile_y * game->map.ceiling_img.height)
-			% game->map.ceiling_img.height;
+		texture.x = (int)(tile_x * game->map.ceiling.current->width)
+			% game->map.ceiling.current->width;
+		texture.y = (int)(tile_y * game->map.ceiling.current->height)
+			% game->map.ceiling.current->height;
 		put_pixel(&game->canvas, x, y,
-			get_pixel(&game->map.ceiling_img, texture.x, texture.y));
+			get_pixel(game->map.ceiling.current, texture.x, texture.y));
 		y--;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:49 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/26 21:17:17 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/26 21:33:56 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ typedef struct s_map
 	int				height;
 	int				player_x;
 	int				player_y;
-	t_image			ceiling_img;
-	t_image			floor_img;
+	t_anim			ceiling;
+	t_anim			floor;
 	t_anim			north;
 	t_anim			south;
 	t_anim			east;
