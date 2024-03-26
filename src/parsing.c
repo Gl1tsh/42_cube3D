@@ -6,13 +6,34 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 19:20:03 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/26 20:55:11 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/26 21:27:14 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-int	load_map(t_map *map, char *path_name)
+int	parse_texture(t_game *game, char *line)
+{
+	char	**parts;
+	int		i;
+
+	parts = ft_split(line, ' ');
+	if (ft_strcmp(parts[0], "NO") == 0)
+		load_anim(&game->map.north, 0, 100000, parts + 1, game->mlx);
+	if (ft_strcmp(parts[0], "SO") == 0)
+		load_anim(&game->map.south, 0, 100000, parts + 1, game->mlx);
+	if (ft_strcmp(parts[0], "WE") == 0)
+		load_anim(&game->map.west, 0, 100000, parts + 1, game->mlx);
+	if (ft_strcmp(parts[0], "EA") == 0)
+		load_anim(&game->map.east, 0, 100000, parts + 1, game->mlx);
+	i = 0;
+	while (parts[i] != NULL)
+		free(parts[i++]);
+	free(parts);
+	return (0);
+}
+
+int	load_map(t_game *game, char *path_name)
 {
 	char	*line;
 	int		width;
@@ -33,17 +54,21 @@ int	load_map(t_map *map, char *path_name)
 		if (is_empty_line(line))
 			continue;
 		if (ft_isalpha(line[0]))
+		{
+			line[ft_strlen(line) - 1] = '\0';
+			parse_texture(game, line);
 			continue;
+		}
 		if (ft_strlen(line) > width)
 			width = ft_strlen(line);
 
 		height++;
 	}
 	close(fd);
-	map->width = width;
-	map->height = height;
-	map->bytes = malloc(map->width * map->height);
-	ft_memset(map->bytes, '1', map->width * map->height);
+	game->map.width = width;
+	game->map.height = height;
+	game->map.bytes = malloc(game->map.width * game->map.height);
+	ft_memset(game->map.bytes, '1', game->map.width * game->map.height);
 	fd = open(path_name, O_RDONLY);
 	line = NULL;
 	y = 0;
@@ -57,11 +82,11 @@ int	load_map(t_map *map, char *path_name)
 			continue;
 		if (ft_isalpha(line[0]))
 			continue;
-		ft_memcpy(map->bytes + (width * y), line, ft_strlen(line));
+		ft_memcpy(game->map.bytes + (width * y), line, ft_strlen(line));
 		y++;
 	}
     close(fd);
-	map->player_x = 3;
-	map->player_y = 1;
+	game->map.player_x = 3;
+	game->map.player_y = 1;
 	return (0);
 }

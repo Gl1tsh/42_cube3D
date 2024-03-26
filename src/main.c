@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:16 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/26 18:40:38 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/26 21:25:30 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	main(int argc, char **argv)
 	game.frame_delay = 1000 / FPS;
 	game.angle_increment = 2 * game.half_fov / game.width;
 	ft_memset(game.keys, 0, 256);
-	if (load_map(&game.map, argv[1]) != 0)
+	if (load_map(&game, argv[1]) != 0)
 		game_quit_error(&game, "erreur de map");
 	game.player_x = game.map.player_x + 0.5;
 	game.player_y = game.map.player_y + 0.5;
@@ -77,19 +77,19 @@ int	main(int argc, char **argv)
 		"assets/katana/katana_new_2.xpm",
 			NULL}, game.mlx);
 
-	load_anim(&game.map.north, 0, 100000, (char *[2]) {
-		"assets/japan/north.xpm",
-			NULL}, game.mlx);
-	load_anim(&game.map.south, 0, 100000, (char *[2]) {
-		"assets/japan/south.xpm",
-			NULL}, game.mlx);
-	load_anim(&game.map.east, 0, 100, (char *[3]) {
-		"assets/japan/east.xpm",
-		"assets/japan/west.xpm",
-			NULL}, game.mlx);
-	load_anim(&game.map.west, 0, 100000, (char *[2]) {
-		"assets/japan/west.xpm",
-			NULL}, game.mlx);
+//	load_anim(&game.map.north, 0, 100000, (char *[2]) {
+//		"assets/japan/north.xpm",
+//			NULL}, game.mlx);
+	// load_anim(&game.map.south, 0, 100000, (char *[2]) {
+	// 	"assets/japan/south.xpm",
+	// 		NULL}, game.mlx);
+	// load_anim(&game.map.east, 0, 100, (char *[3]) {
+	// 	"assets/japan/east.xpm",
+	// 	"assets/japan/west.xpm",
+	// 		NULL}, game.mlx);
+	// load_anim(&game.map.west, 0, 100000, (char *[2]) {
+	// 	"assets/japan/west.xpm",
+	// 		NULL}, game.mlx);
 
 	init_minimap(&game.minimap, game.mlx);
 

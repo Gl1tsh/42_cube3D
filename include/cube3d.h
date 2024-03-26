@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:49 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/26 20:54:57 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/26 21:17:17 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ unsigned int	get_pixel(t_image *image, int x, int y);
 int				is_empty_line(char *line);
 
 // map
-int				load_map(t_map *map, char *path_name);
+int				load_map(t_game *game, char *path_name);
 char			map_get_at(t_map *map, int x, int y);
 
 // draw
