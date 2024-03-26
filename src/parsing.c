@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 19:20:03 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/26 21:38:55 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/26 21:46:32 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	parse_texture(t_game *game, char *line)
 		load_anim(&game->map.floor, 0, 100000, parts + 1, game->mlx);
 	if (ft_strcmp(parts[0], "C") == 0)
 		load_anim(&game->map.ceiling, 0, 100000, parts + 1, game->mlx);
-
 	i = 0;
 	while (parts[i] != NULL)
 		free(parts[i++]);
@@ -55,18 +54,17 @@ int	load_map(t_game *game, char *path_name)
 		free(line);
 		line = get_next_line(fd);
 		if (line == NULL)
-			break;
+			break ;
 		if (is_empty_line(line))
-			continue;
+			continue ;
 		if (ft_isalpha(line[0]))
 		{
 			line[ft_strlen(line) - 1] = '\0';
 			parse_texture(game, line);
-			continue;
+			continue ;
 		}
 		if (ft_strlen(line) > width)
 			width = ft_strlen(line);
-
 		height++;
 	}
 	close(fd);
@@ -82,15 +80,15 @@ int	load_map(t_game *game, char *path_name)
 		free(line);
 		line = get_next_line(fd);
 		if (line == NULL)
-			break;
+			break ;
 		if (is_empty_line(line))
-			continue;
+			continue ;
 		if (ft_isalpha(line[0]))
-			continue;
+			continue ;
 		ft_memcpy(game->map.bytes + (width * y), line, ft_strlen(line));
 		y++;
 	}
-    close(fd);
+	close(fd);
 	game->map.player_x = 3;
 	game->map.player_y = 1;
 	return (0);
