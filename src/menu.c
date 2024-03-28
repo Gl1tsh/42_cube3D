@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:34:08 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/28 18:10:03 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/28 19:16:10 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	menu_loop(t_game *game, long now)
 	return (0);
 }
 
-int init_menu(t_game *game)
+int	init_menu(t_game *game)
 {
 	if (load_image(&game->menu1_img, "assets/menu/menu1.xpm", game->mlx) != 0)
 		return (1);
