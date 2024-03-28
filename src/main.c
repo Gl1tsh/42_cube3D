@@ -6,25 +6,11 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:16 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/28 19:16:37 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/28 19:54:58 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
-
-int	load_color(t_image *image, unsigned int color, void *mlx)
-{
-	int		endian;
-
-	image->width = 1;
-	image->height = 1;
-	image->img = mlx_new_image(mlx, image->width, image->height);
-	image->bytes = mlx_get_data_addr(image->img,
-			&image->bpp, &image->line_size, &endian);
-	image->bpp = image->bpp / 8;
-	*(unsigned int *)(image->bytes) = color;
-	return (0);
-}
 
 int	key_pressed(int keycode, t_game *game)
 {
