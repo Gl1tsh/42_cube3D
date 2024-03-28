@@ -27,6 +27,7 @@ Temporary Items
 
 # C
 obj/
+build/
 minilibx/*.o
 libft/*.o
 minilibx/*.a
