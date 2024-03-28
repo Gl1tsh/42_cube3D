@@ -6,11 +6,16 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 18:09:15 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/28 13:11:05 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/28 17:37:11 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
+void	free_image(t_image *image, void *mlx)
+{
+	mlx_destroy_image(mlx, image->img);
+}
 
 int	create_image(t_image *image, int width, int height, void *mlx)
 {
@@ -43,9 +48,4 @@ int	load_image(t_image *image, char *filename, void *mlx)
 		return (1);
 	image->bpp = image->bpp / 8;
 	return (0);
-}
-
-void	free_image(t_image *image, void *mlx)
-{
-	mlx_destroy_image(mlx, image->img);
 }

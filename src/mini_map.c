@@ -6,13 +6,13 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:56:10 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/26 18:36:40 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/28 17:41:41 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-void	init_minimap(t_minimap *minimap, void *mlx)
+int	init_minimap(t_minimap *minimap, void *mlx)
 {
 	minimap->player_color = 0x00ff0000;
 	minimap->floor_color = 0x00608060;
@@ -20,8 +20,9 @@ void	init_minimap(t_minimap *minimap, void *mlx)
 	minimap->half_width = 10;
 	minimap->half_height = 5;
 	minimap->item_size = 10;
-	create_image(&minimap->image, minimap->half_width * 2 * minimap->item_size,
-		minimap->half_height * 2 * minimap->item_size, mlx);
+	return (create_image(&minimap->image,
+			minimap->half_width * 2 * minimap->item_size,
+			minimap->half_height * 2 * minimap->item_size, mlx));
 }
 
 void	draw_square(t_minimap *minimap, int x, int y, unsigned int color)

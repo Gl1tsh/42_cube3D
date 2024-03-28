@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:49 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/28 17:23:20 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/28 17:43:31 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ void			free_array(char **array);
 // map
 int				load_map(t_game *game, char *path_name);
 char			map_get_at(t_map *map, int x, int y);
+void			free_map(t_game *game);
 
 // draw
 void			draw_rays(t_game *game);
@@ -164,13 +165,15 @@ void			update_player(t_game *game);
 void			update_anim(t_anim *anim, long now);
 int				load_anim(t_anim *anim, int pause_duration, int frame_duration,
 					char **filenames, void *mlx);
+void			free_anim(t_anim *anim, void *mlx);
 
 // image
 int				load_image(t_image *image, char *filename, void *mlx);
 int				create_image(t_image *image, int width, int height, void *mlx);
+void			free_image(t_image *image, void *mlx);
 
 // minimap
-void			init_minimap(t_minimap *minimap, void *mlx);
+int				init_minimap(t_minimap *minimap, void *mlx);
 void			draw_minimap(t_minimap *minimap, t_game *game);
 
 // parsing

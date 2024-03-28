@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:16 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/28 12:49:23 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/28 17:46:14 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,12 @@ int	main(int argc, char **argv)
 {
 	(void)argc;
 	t_game	game;
-	int		endian;
 
-	game.win = NULL;
+	ft_memset(&game, 0, sizeof(t_game));
 	game.precision = 128.0;
 	game.half_fov = M_PI_2 / 3.0;
 	game.player_angle = M_PI_2;
-	game.player_speed = 0.05;
+	game.player_speed = 0.15;
 	game.player_angle_delta = 0.05;
 	game.width = 1024;
 	game.height = 640;
@@ -77,7 +76,8 @@ int	main(int argc, char **argv)
 		"assets/katana/katana_new_3.xpm",
 		"assets/katana/katana_new_2.xpm",
 			NULL}, game.mlx);
-	init_minimap(&game.minimap, game.mlx);
+	if (init_minimap(&game.minimap, game.mlx))
+		game_quit_error(&game, "erreur init minimap");
 	//load_color(&game.map.ceiling_img, 0x00ff0000, game.mlx);
 	load_image(&game.menu1_img, "assets/menu/menu1.xpm", game.mlx);
 	load_image(&game.menu2_img, "assets/menu/menu2.xpm", game.mlx);

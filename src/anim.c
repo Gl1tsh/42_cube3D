@@ -6,11 +6,23 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 16:45:26 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/28 13:13:01 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/28 17:47:05 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
+void	free_anim(t_anim *anim, void *mlx)
+{
+	int	i;
+
+	i = 0;
+	while (i < anim->count)
+	{
+		free_image(&anim->sprites[i], mlx);
+		i++;
+	}
+}
 
 void	update_anim(t_anim *anim, long now)
 {

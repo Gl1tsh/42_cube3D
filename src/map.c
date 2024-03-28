@@ -6,11 +6,22 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:33:31 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/28 17:24:19 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/28 17:44:03 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
+void	free_map(t_game *game)
+{
+	free(game->map.bytes);
+	free_anim(&game->map.ceiling, game->mlx);
+	free_anim(&game->map.floor, game->mlx);
+	free_anim(&game->map.north, game->mlx);
+	free_anim(&game->map.south, game->mlx);
+	free_anim(&game->map.east, game->mlx);
+	free_anim(&game->map.west, game->mlx);
+}
 
 char	map_get_at(t_map *map, int x, int y)
 {
