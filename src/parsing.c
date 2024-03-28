@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 19:20:03 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/28 19:30:44 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/28 20:13:54 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ int	measure_map(t_game *game, int fd)
 			game->map.width = ft_strlen(line);
 		game->map.height++;
 	}
+	if (game->map.width < 3 || game->map.height < 3)
+		return (1);
 	return (check_texture_counts(counters));
 }
 
