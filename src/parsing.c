@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 19:20:03 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/28 13:23:25 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/28 17:26:37 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,19 +60,23 @@ int	check_texture(int *counters, char *line)
 	return (0);
 }
 
-int	load_map(t_game *game, char *path_name)
+int	check_texture_counts(int *counters)
+{
+	int	i;
+
+	i = 0;
+	while (i < 6)
+		if (counters[i++] != 1)
+			return (1);
+	return (0);
+}
+
+int	measure_map(t_game *game, int fd)
 {
 	static int	counters[6] = {0, 0, 0, 0, 0, 0};
 	char		*line;
-	int			width;
-	int			height;
-	int			y;
-	int			fd;
 
-	width = 0;
-	height = 0;
 	line = NULL;
-	fd = open(path_name, O_RDONLY);
 	while (1)
 	{
 		free(line);
@@ -87,20 +91,18 @@ int	load_map(t_game *game, char *path_name)
 			check_texture(counters, line);
 			continue ;
 		}
-		if (ft_strlen(line) > width)
-			width = ft_strlen(line);
-		height++;
+		if ((int)ft_strlen(line) > game->map.width)
+			game->map.width = ft_strlen(line);
+		game->map.height++;
 	}
-	close(fd);
-	y = 0;
-	while (y < 6)
-		if (counters[y++] != 1)
-			return (122);
-	game->map.width = width;
-	game->map.height = height;
-	game->map.bytes = malloc(game->map.width * game->map.height);
-	ft_memset(game->map.bytes, '1', game->map.width * game->map.height);
-	fd = open(path_name, O_RDONLY);
+	return (check_texture_counts(counters));
+}
+
+int	parse_map(t_game *game, int fd)
+{
+	char		*line;
+	int			y;
+
 	line = NULL;
 	y = 0;
 	while (1)
@@ -115,17 +117,12 @@ int	load_map(t_game *game, char *path_name)
 		{
 			line[ft_strlen(line) - 1] = '\0';
 			if (parse_texture(game, line) != 0)
-			{
-				close(fd);
 				return (1);
-			}
 			continue ;
 		}
-		ft_memcpy(game->map.bytes + (width * y), line, ft_strlen(line));
+		ft_memcpy(game->map.bytes + (game->map.width * y),
+			line, ft_strlen(line));
 		y++;
 	}
-	close(fd);
-	game->map.player_x = 3;
-	game->map.player_y = 1;
 	return (0);
 }
