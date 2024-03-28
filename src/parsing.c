@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 19:20:03 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/28 12:56:27 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/28 13:23:25 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,33 @@
 int	parse_texture(t_game *game, char *line)
 {
 	char	**parts;
-	int		i;
 
 	parts = ft_split(line, ' ');
 	if (ft_strcmp(parts[0], "NO") == 0)
-		load_anim(&game->map.north, 0, 100000, parts + 1, game->mlx);
+		if (load_anim(&game->map.north, 0, 10000, parts + 1, game->mlx) != 0)
+			return (1);
 	if (ft_strcmp(parts[0], "SO") == 0)
-		load_anim(&game->map.south, 0, 100000, parts + 1, game->mlx);
+		if (load_anim(&game->map.south, 0, 10000, parts + 1, game->mlx) != 0)
+			return (1);
 	if (ft_strcmp(parts[0], "WE") == 0)
-		load_anim(&game->map.west, 0, 100000, parts + 1, game->mlx);
+		if (load_anim(&game->map.west, 0, 10000, parts + 1, game->mlx) != 0)
+			return (1);
 	if (ft_strcmp(parts[0], "EA") == 0)
-		load_anim(&game->map.east, 0, 100000, parts + 1, game->mlx);
+		if (load_anim(&game->map.east, 0, 10000, parts + 1, game->mlx) != 0)
+			return (1);
 	if (ft_strcmp(parts[0], "F") == 0)
-		load_anim(&game->map.floor, 0, 100000, parts + 1, game->mlx);
+		if (load_anim(&game->map.floor, 0, 10000, parts + 1, game->mlx) != 0)
+			return (1);
 	if (ft_strcmp(parts[0], "C") == 0)
-		load_anim(&game->map.ceiling, 0, 100000, parts + 1, game->mlx);
-	i = 0;
-	while (parts[i] != NULL)
-		free(parts[i++]);
-	free(parts);
+		if (load_anim(&game->map.ceiling, 0, 10000, parts + 1, game->mlx) != 0)
+			return (1);
+	free_array(parts);
 	return (0);
 }
 
 int	check_texture(int *counters, char *line)
 {
 	char	**parts;
-	int		i;
 
 	parts = ft_split(line, ' ');
 	if (ft_strcmp(parts[0], "NO") == 0)
@@ -55,10 +56,7 @@ int	check_texture(int *counters, char *line)
 		counters[4]++;
 	if (ft_strcmp(parts[0], "C") == 0)
 		counters[5]++;
-	i = 0;
-	while (parts[i] != NULL)
-		free(parts[i++]);
-	free(parts);
+	free_array(parts);
 	return (0);
 }
 
@@ -116,7 +114,11 @@ int	load_map(t_game *game, char *path_name)
 		if (ft_isalpha(line[0]))
 		{
 			line[ft_strlen(line) - 1] = '\0';
-			parse_texture(game, line);
+			if (parse_texture(game, line) != 0)
+			{
+				close(fd);
+				return (1);
+			}
 			continue ;
 		}
 		ft_memcpy(game->map.bytes + (width * y), line, ft_strlen(line));

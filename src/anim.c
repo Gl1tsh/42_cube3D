@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 16:45:26 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/18 17:48:57 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/28 13:13:01 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	update_anim(t_anim *anim, long now)
 	}
 }
 
-void	load_anim(t_anim *anim, int pause_duration, int frame_duration,
+int	load_anim(t_anim *anim, int pause_duration, int frame_duration,
 	char **filenames, void *mlx)
 {
 	int	i;
@@ -44,11 +44,15 @@ void	load_anim(t_anim *anim, int pause_duration, int frame_duration,
 	while (filenames[anim->count] != NULL)
 		anim->count++;
 	anim->sprites = malloc(sizeof(t_anim) * anim->count);
+	if (anim->sprites == NULL)
+		return (1);
 	i = 0;
 	while (filenames[i] != NULL)
 	{
-		load_image(&anim->sprites[i], filenames[i], mlx);
+		if (load_image(&anim->sprites[i], filenames[i], mlx) != 0)
+			return (1);
 		i++;
 	}
 	anim->current = &anim->sprites[0];
+	return (0);
 }

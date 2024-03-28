@@ -6,12 +6,22 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:35:00 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/26 20:54:37 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/28 13:17:09 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 #include <sys/time.h>
+
+void	free_array(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i] != NULL)
+		free(array[i++]);
+	free(array);
+}
 
 long	get_timestamp_ms(void)
 {
