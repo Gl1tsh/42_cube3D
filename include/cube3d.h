@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:49 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/28 17:43:31 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/28 18:17:08 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ void			draw_ceiling(t_game *game, int x, t_ray *ray);
 void			draw_wall(t_game *game, int x, t_ray *ray, t_image *texture);
 
 // game
+void			init_game(t_game *game);
 int				game_loop(t_game *game);
 int				menu_loop(t_game *game, long now);
 
@@ -179,5 +180,9 @@ void			draw_minimap(t_minimap *minimap, t_game *game);
 // parsing
 int				measure_map(t_game *game, int fd);
 int				parse_map(t_game *game, int fd);
+
+// menu
+int				init_menu(t_game *game);
+void			free_menu(t_game *game);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 18:09:15 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/28 17:37:11 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/28 18:21:24 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	free_image(t_image *image, void *mlx)
 {
-	mlx_destroy_image(mlx, image->img);
+	if (image->img != NULL)
+		mlx_destroy_image(mlx, image->img);
 }
 
 int	create_image(t_image *image, int width, int height, void *mlx)

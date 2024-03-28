@@ -6,11 +6,18 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:34:08 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/15 17:55:05 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/28 18:10:03 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
+void	free_menu(t_game *game)
+{
+	free_image(&game->menu1_img, game->mlx);
+	free_image(&game->menu2_img, game->mlx);
+	free_image(&game->menuv_img, game->mlx);
+}
 
 void	draw_background(t_game *game)
 {
@@ -59,5 +66,17 @@ int	menu_loop(t_game *game, long now)
 		draw_menu(game);
 		game->next_frame_ts = now + game->frame_delay * 35;
 	}
+	return (0);
+}
+
+int init_menu(t_game *game)
+{
+	if (load_image(&game->menu1_img, "assets/menu/menu1.xpm", game->mlx) != 0)
+		return (1);
+	if (load_image(&game->menu2_img, "assets/menu/menu2.xpm", game->mlx) != 0)
+		return (1);
+	if (load_image(&game->menuv_img, "assets/menu/menuv.xpm", game->mlx) != 0)
+		return (1);
+	game->display_menu = 3;
 	return (0);
 }
