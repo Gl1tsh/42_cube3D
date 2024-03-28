@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:16 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/26 21:43:42 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/28 12:49:23 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	main(int argc, char **argv)
 	t_game	game;
 	int		endian;
 
+	game.win = NULL;
 	game.precision = 128.0;
 	game.half_fov = M_PI_2 / 3.0;
 	game.player_angle = M_PI_2;
