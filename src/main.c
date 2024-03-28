@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:16 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/28 18:31:39 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/28 19:16:37 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	load_color(t_image *image, unsigned int color, void *mlx)
 	image->width = 1;
 	image->height = 1;
 	image->img = mlx_new_image(mlx, image->width, image->height);
-	image->bytes = mlx_get_data_addr(image->img, &image->bpp, &image->line_size, &endian);
+	image->bytes = mlx_get_data_addr(image->img,
+			&image->bpp, &image->line_size, &endian);
 	image->bpp = image->bpp / 8;
 	*(unsigned int *)(image->bytes) = color;
 	return (0);
@@ -74,13 +75,3 @@ int	main(int argc, char **argv)
 	run_game(&game);
 	return (1);
 }
-
-
-	// load_anim(&game.katana, 750, 200, (char *[7]) {
-	// 	"assets/katana/katana_new_1.xpm",
-	// 	"assets/katana/katana_new_2.xpm",
-	// 	"assets/katana/katana_new_3.xpm",
-	// 	"assets/katana/katana_new_4.xpm",
-	// 	"assets/katana/katana_new_3.xpm",
-	// 	"assets/katana/katana_new_2.xpm",
-	// 		NULL}, game.mlx);

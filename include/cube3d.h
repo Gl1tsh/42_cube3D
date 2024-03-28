@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:49 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/28 18:17:08 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/28 18:39:14 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ long			get_timestamp_ms(void);
 void			put_pixel(t_image *image, int x, int y, unsigned int color);
 unsigned int	get_pixel(t_image *image, int x, int y);
 int				is_empty_line(char *line);
-void			free_array(char **array);
+int				free_array(char **array);
 
 // map
 int				load_map(t_game *game, char *path_name);

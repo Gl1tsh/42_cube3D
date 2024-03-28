@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 19:20:03 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/28 17:26:37 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/28 18:46:52 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ int	parse_texture(t_game *game, char *line)
 	if (ft_strcmp(parts[0], "C") == 0)
 		if (load_anim(&game->map.ceiling, 0, 10000, parts + 1, game->mlx) != 0)
 			return (1);
-	free_array(parts);
-	return (0);
+	if (ft_strcmp(parts[0], "K") == 0)
+		load_anim(&game->katana, 750, 200, parts + 1, game->mlx);
+	return (free_array(parts));
 }
 
 int	check_texture(int *counters, char *line)
