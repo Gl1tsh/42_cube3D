@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 19:20:03 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/28 18:46:52 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/28 19:30:44 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,25 @@ int	parse_texture(t_game *game, char *line)
 
 	parts = ft_split(line, ' ');
 	if (ft_strcmp(parts[0], "NO") == 0)
-		if (load_anim(&game->map.north, 0, 10000, parts + 1, game->mlx) != 0)
+		if (load_anim(&game->map.north, 10000, parts + 1, game->mlx) != 0)
 			return (1);
 	if (ft_strcmp(parts[0], "SO") == 0)
-		if (load_anim(&game->map.south, 0, 10000, parts + 1, game->mlx) != 0)
+		if (load_anim(&game->map.south, 10000, parts + 1, game->mlx) != 0)
 			return (1);
 	if (ft_strcmp(parts[0], "WE") == 0)
-		if (load_anim(&game->map.west, 0, 10000, parts + 1, game->mlx) != 0)
+		if (load_anim(&game->map.west, 10000, parts + 1, game->mlx) != 0)
 			return (1);
 	if (ft_strcmp(parts[0], "EA") == 0)
-		if (load_anim(&game->map.east, 0, 10000, parts + 1, game->mlx) != 0)
+		if (load_anim(&game->map.east, 10000, parts + 1, game->mlx) != 0)
 			return (1);
 	if (ft_strcmp(parts[0], "F") == 0)
-		if (load_anim(&game->map.floor, 0, 10000, parts + 1, game->mlx) != 0)
+		if (load_anim(&game->map.floor, 10000, parts + 1, game->mlx) != 0)
 			return (1);
 	if (ft_strcmp(parts[0], "C") == 0)
-		if (load_anim(&game->map.ceiling, 0, 10000, parts + 1, game->mlx) != 0)
+		if (load_anim(&game->map.ceiling, 10000, parts + 1, game->mlx) != 0)
 			return (1);
 	if (ft_strcmp(parts[0], "K") == 0)
-		load_anim(&game->katana, 750, 200, parts + 1, game->mlx);
+		load_anim(&game->katana, 150, parts + 1, game->mlx);
 	return (free_array(parts));
 }
 

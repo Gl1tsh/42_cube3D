@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:49 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/28 18:39:14 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/28 19:29:28 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ typedef struct s_image
 typedef struct s_anim
 {
 	int			count;
-	int			pause_duration;
 	int			frame_duration;
 	int			current_i;
 	long		next_frame_ts;
@@ -164,7 +163,7 @@ void			update_player(t_game *game);
 
 // anim
 void			update_anim(t_anim *anim, long now);
-int				load_anim(t_anim *anim, int pause_duration, int frame_duration,
+int				load_anim(t_anim *anim, int frame_duration,
 					char **filenames, void *mlx);
 void			free_anim(t_anim *anim, void *mlx);
 
