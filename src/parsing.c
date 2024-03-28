@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 19:20:03 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/26 21:46:32 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/28 12:56:27 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,39 @@ int	parse_texture(t_game *game, char *line)
 	return (0);
 }
 
+int	check_texture(int *counters, char *line)
+{
+	char	**parts;
+	int		i;
+
+	parts = ft_split(line, ' ');
+	if (ft_strcmp(parts[0], "NO") == 0)
+		counters[0]++;
+	if (ft_strcmp(parts[0], "SO") == 0)
+		counters[1]++;
+	if (ft_strcmp(parts[0], "WE") == 0)
+		counters[2]++;
+	if (ft_strcmp(parts[0], "EA") == 0)
+		counters[3]++;
+	if (ft_strcmp(parts[0], "F") == 0)
+		counters[4]++;
+	if (ft_strcmp(parts[0], "C") == 0)
+		counters[5]++;
+	i = 0;
+	while (parts[i] != NULL)
+		free(parts[i++]);
+	free(parts);
+	return (0);
+}
+
 int	load_map(t_game *game, char *path_name)
 {
-	char	*line;
-	int		width;
-	int		height;
-	int		y;
-	int		fd;
+	static int	counters[6] = {0, 0, 0, 0, 0, 0};
+	char		*line;
+	int			width;
+	int			height;
+	int			y;
+	int			fd;
 
 	width = 0;
 	height = 0;
@@ -60,7 +86,7 @@ int	load_map(t_game *game, char *path_name)
 		if (ft_isalpha(line[0]))
 		{
 			line[ft_strlen(line) - 1] = '\0';
-			parse_texture(game, line);
+			check_texture(counters, line);
 			continue ;
 		}
 		if (ft_strlen(line) > width)
@@ -68,6 +94,10 @@ int	load_map(t_game *game, char *path_name)
 		height++;
 	}
 	close(fd);
+	y = 0;
+	while (y < 6)
+		if (counters[y++] != 1)
+			return (122);
 	game->map.width = width;
 	game->map.height = height;
 	game->map.bytes = malloc(game->map.width * game->map.height);
@@ -84,7 +114,11 @@ int	load_map(t_game *game, char *path_name)
 		if (is_empty_line(line))
 			continue ;
 		if (ft_isalpha(line[0]))
+		{
+			line[ft_strlen(line) - 1] = '\0';
+			parse_texture(game, line);
 			continue ;
+		}
 		ft_memcpy(game->map.bytes + (width * y), line, ft_strlen(line));
 		y++;
 	}
