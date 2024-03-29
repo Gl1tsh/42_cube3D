@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:16 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/28 19:54:58 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/29 18:18:06 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,7 @@ int	main(int argc, char **argv)
 	if (game.mlx == NULL)
 		game_quit_error(&game, "erreur mlx init");
 	if (load_map(&game, argv[1]) != 0)
-		game_quit_error(&game, "erreur de map");
-	game.player_x = game.map.player_x + 0.5;
-	game.player_y = game.map.player_y + 0.5;
+		game_quit_error(&game, "erreur fichier map");
 	game.win = mlx_new_window(game.mlx, game.width, game.height, "cub3d");
 	if (game.win == NULL)
 		game_quit_error(&game, "erreur game window");
