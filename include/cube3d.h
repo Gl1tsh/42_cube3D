@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:49 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/28 19:29:28 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/29 15:06:50 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ int				free_array(char **array);
 int				load_map(t_game *game, char *path_name);
 char			map_get_at(t_map *map, int x, int y);
 void			free_map(t_game *game);
+int				check_map(t_game *game);
 
 // draw
 void			draw_rays(t_game *game);

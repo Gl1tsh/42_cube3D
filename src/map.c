@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:33:31 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/28 17:44:03 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/29 15:56:44 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,5 @@ int	load_map(t_game *game, char *path_name)
 	close(fd);
 	if (error)
 		return (error);
-	game->map.player_x = 3;
-	game->map.player_y = 1;
-	return (0);
+	return (check_map(game));
 }
