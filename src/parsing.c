@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 19:20:03 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/28 20:13:54 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/29 18:07:48 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	measure_map(t_game *game, int fd)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		if (is_empty_line(line))
+		if (game->map.width == 0 && is_empty_line(line))
 			continue ;
 		if (ft_isalpha(line[0]))
 		{
@@ -92,12 +92,12 @@ int	measure_map(t_game *game, int fd)
 			check_texture(counters, line);
 			continue ;
 		}
+		if (is_empty_line(line))
+			return (1);
 		if ((int)ft_strlen(line) > game->map.width)
 			game->map.width = ft_strlen(line);
 		game->map.height++;
 	}
-	if (game->map.width < 3 || game->map.height < 3)
-		return (1);
 	return (check_texture_counts(counters));
 }
 

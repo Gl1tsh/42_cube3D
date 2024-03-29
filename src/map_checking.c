@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:04:18 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/29 16:54:39 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/29 18:21:18 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ int	check_bounds(t_game *game)
 
 int	check_map(t_game *game)
 {
+	if (game->map.width < 3 || game->map.height < 3)
+		return (1);
 	if (find_player(game) != 0)
 		return (1);
 	if (check_invalid_char(game) != 0)
