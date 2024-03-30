@@ -15,8 +15,8 @@
 int	init_minimap(t_minimap *minimap, void *mlx)
 {
 	minimap->player_color = 0x00ff0000;
-	minimap->floor_color = 0x00608060;
-	minimap->wall_color = 0x00804000;
+	minimap->floor_color = 0x00845b2a;
+	minimap->wall_color = 0x004c3228;
 	minimap->half_width = 10;
 	minimap->half_height = 5;
 	minimap->item_size = 10;
