@@ -24,7 +24,7 @@ int	parse_texture(t_game *game, char *line)
 		if (load_anim(&game->map.south, 10000, parts + 1, game->mlx) != 0)
 			return (1);
 	if (ft_strcmp(parts[0], "WE") == 0)
-		if (load_anim(&game->map.west, 10000, parts + 1, game->mlx) != 0)
+		if (load_anim(&game->map.west, 60, parts + 1, game->mlx) != 0)
 			return (1);
 	if (ft_strcmp(parts[0], "EA") == 0)
 		if (load_anim(&game->map.east, 10000, parts + 1, game->mlx) != 0)
@@ -36,7 +36,7 @@ int	parse_texture(t_game *game, char *line)
 		if (load_anim(&game->map.ceiling, 10000, parts + 1, game->mlx) != 0)
 			return (1);
 	if (ft_strcmp(parts[0], "K") == 0)
-		load_anim(&game->katana, 150, parts + 1, game->mlx);
+		load_anim(&game->katana, 30, parts + 1, game->mlx);
 	return (free_array(parts));
 }
 
