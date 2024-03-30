@@ -89,7 +89,6 @@ fclean: clean
 
 # Règle pour recompiler les fichiers objets et l'exécutable
 re:
-	@printf "\n┌──────────────────────────────\n│ Cleaning and ${CGRN}recompiling${RSET}...\n"
 	@${MAKE} fclean
 	@${MAKE} all
 
