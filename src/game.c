@@ -66,7 +66,7 @@ int	game_loop(t_game *game)
 		draw_rays(game);
 		mlx_put_image_to_window(game->mlx, game->win, game->canvas.img, 0, 0);
 		mlx_put_image_to_window(game->mlx, game->win,
-			game->hud_img.img, game->width - game->hud_img.width, 0);
+			game->hud_img.img, game->width - game->hud_img.width - 10, 10);
 		draw_katana(game);
 		draw_minimap(&game->minimap, game);
 		draw_fps(game, now);
