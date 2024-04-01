@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:31:50 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/29 17:56:09 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/31 14:54:46 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int	game_loop(t_game *game)
 		update_player(game);
 		draw_rays(game);
 		mlx_put_image_to_window(game->mlx, game->win, game->canvas.img, 0, 0);
+		mlx_put_image_to_window(game->mlx, game->win,
+			game->hud_img.img, 200, 200);
 		draw_katana(game);
 		draw_minimap(&game->minimap, game);
 		draw_fps(game, now);

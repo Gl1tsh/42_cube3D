@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:49 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/29 15:06:50 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/30 17:12:13 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef struct s_game
 	t_image		menu2_img;
 	t_image		menuv_img;
 	t_image		canvas;
+	t_image		hud_img;
 	t_anim		katana;
 	t_minimap	minimap;
 }	t_game;

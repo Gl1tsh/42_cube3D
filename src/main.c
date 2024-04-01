@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:16 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/29 18:18:06 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/30 17:11:45 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,13 @@ void	run_game(t_game *game)
 	mlx_loop(game->mlx);
 }
 
+int	load_hud(t_game *game)
+{
+	if (load_image(&game->hud_img, "assets/hud/hud.xpm", game->mlx) != 0)
+		return (1);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_game	game;
@@ -48,6 +55,8 @@ int	main(int argc, char **argv)
 		game_quit_error(&game, "erreur mlx init");
 	if (load_map(&game, argv[1]) != 0)
 		game_quit_error(&game, "erreur fichier map");
+	if (load_hud(&game))
+		game_quit_error(&game, "erreur load hud");
 	game.win = mlx_new_window(game.mlx, game.width, game.height, "cub3d");
 	if (game.win == NULL)
 		game_quit_error(&game, "erreur game window");
