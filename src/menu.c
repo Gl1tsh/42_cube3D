@@ -78,5 +78,6 @@ int	init_menu(t_game *game)
 	if (load_image(&game->menuv_img, "assets/menu/menuv.xpm", game->mlx) != 0)
 		return (1);
 	game->display_menu = 3;
+	mlx_mouse_hide();
 	return (0);
 }
