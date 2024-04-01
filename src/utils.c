@@ -34,10 +34,8 @@ long	get_timestamp_ms(void)
 
 void	put_pixel(t_image *image, int x, int y, unsigned int color)
 {
-	if (y < 0)
-		y = 0;
-	if (y > image->height)
-		y = image->height;
+	if (x < 0 || x >= image->width || y < 0 || y >= image->height)
+		return ;
 	*(unsigned int *)(image->bytes + (x * image->bpp)
 			+ (image->line_size * y)) = color;
 }

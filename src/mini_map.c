@@ -12,7 +12,7 @@
 
 #include "cube3d.h"
 
-void free_minimap(t_game *game)
+void	free_minimap(t_game *game)
 {
 	free_image(&game->minimap.scroll, game->mlx);
 	free_image(&game->minimap.image, game->mlx);
@@ -39,10 +39,6 @@ void	draw_square(t_minimap *minimap, int x, int y, unsigned int color)
 	int	y_index;
 
 	x_index = x;
-	if (x < 0 || x >= (minimap->image.width - minimap->item_size))
-		return ;
-	if (y < 0 || y >= (minimap->image.height - minimap->item_size))
-		return ;
 	while (x_index < (x + minimap->item_size))
 	{
 		y_index = y;
