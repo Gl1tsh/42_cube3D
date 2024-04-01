@@ -45,7 +45,7 @@ ${LIBFT}:
 	@if [ ! -f libft/libft.a ]; then \
 		printf "├──────────────────────────────\n"	; \
 		printf "│ Compiling ${CGRN}libft${RSET}...\n"; \
-		${MAKE} -s -C libft all; \
+		@${MAKE} -s -C libft all; \
 		printf "└──────────────────────────────\n"; \
 	fi
 
@@ -55,7 +55,7 @@ ${NAME}: ${LIBFT} ${MLXDIR} ${OBJS}
 	@printf "├──────────────────────────────\n"
 	@make -C $(LIBFTDIR)
 	@make -C $(MLXDIR) > /dev/null
-	@${CC} -o ${NAME} ${OBJS} -Llibft -lft ${FLAGS} ${INCMLX} 
+	@${CC} -o ${NAME} ${OBJS} -Llibft -lft ${FLAGS} ${INCMLX}
 	@printf "├──────────────────────────────\n"
 	@if [ -f has_warnings ]; then \
 		printf "├─>>>${CGRN} cube3d compiled ${CVIO}but with warnings!${RSET}\n"; \
