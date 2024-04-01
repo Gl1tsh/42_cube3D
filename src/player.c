@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:45:25 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/18 15:47:55 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/01 17:38:03 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,26 @@
 void	rotate_player(t_game *game, double sign)
 {
 	game->player_angle += game->player_angle_delta * sign;
+}
+
+void	rotate_player_mouse(t_game *game)
+{
+	int			x;
+	int			y;
+	double		diff;
+	static int	old_x;
+
+	mlx_mouse_get_pos(game->win, &x, &y);
+	if (old_x == x)
+		return ;
+	diff = x - old_x;
+	if (diff < -500.0)
+		diff = -500.0;
+	if (diff > 500.0)
+		diff = 500.0;
+	diff /= 10.0;
+	rotate_player(game, diff);
+	old_x = x;
 }
 
 void	move_player(t_game *game, double angle_delta)
@@ -48,4 +68,5 @@ void	update_player(t_game *game)
 		rotate_player(game, -1.0);
 	else if (game->keys[KEY_RIGHT])
 		rotate_player(game, 1.0);
+	rotate_player_mouse(game);
 }
