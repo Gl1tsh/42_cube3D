@@ -17,6 +17,7 @@ void	game_free(t_game *game)
 	if (game->win != NULL)
 		mlx_destroy_window(game->mlx, game->win);
 	free_map(game);
+	free_minimap(game);
 	free_menu(game);
 }
 

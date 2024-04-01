@@ -70,6 +70,7 @@ typedef struct s_minimap
 	unsigned int	wall_color;
 	unsigned int	player_color;
 	t_image			image;
+	t_image			scroll;
 }	t_minimap;
 
 typedef struct s_map
@@ -177,6 +178,7 @@ void			free_image(t_image *image, void *mlx);
 // minimap
 int				init_minimap(t_minimap *minimap, void *mlx);
 void			draw_minimap(t_minimap *minimap, t_game *game);
+void			free_minimap(t_game *game);
 
 // parsing
 int				measure_map(t_game *game, int fd);

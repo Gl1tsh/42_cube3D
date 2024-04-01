@@ -6,20 +6,28 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:56:10 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/28 17:41:41 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/03/31 14:40:32 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
+void free_minimap(t_game *game)
+{
+	free_image(&game->minimap.scroll, game->mlx);
+	free_image(&game->minimap.image, game->mlx);
+}
+
 int	init_minimap(t_minimap *minimap, void *mlx)
 {
-	minimap->player_color = 0x00ff0000;
+	minimap->player_color = 0x00ffffff;
 	minimap->floor_color = 0x00845b2a;
 	minimap->wall_color = 0x004c3228;
 	minimap->half_width = 10;
 	minimap->half_height = 5;
 	minimap->item_size = 10;
+	if (load_image(&minimap->scroll, "assets/scroll.xpm", mlx) != 0)
+		return (1);
 	return (create_image(&minimap->image,
 			minimap->half_width * 2 * minimap->item_size,
 			minimap->half_height * 2 * minimap->item_size, mlx));
@@ -59,7 +67,10 @@ void	draw_player(t_minimap *minimap, t_game *game)
 	put_pixel(&minimap->image, x, y + 1, minimap->player_color);
 	put_pixel(&minimap->image, x - 1, y, minimap->player_color);
 	put_pixel(&minimap->image, x + 1, y, minimap->player_color);
-	mlx_put_image_to_window(game->mlx, game->win, minimap->image.img, 10, 10);
+	mlx_put_image_to_window(game->mlx, game->win, minimap->scroll.img, 10, 10);
+	mlx_put_image_to_window(game->mlx, game->win, minimap->image.img, 38, 38);
+	mlx_put_image_to_window(game->mlx, game->win, minimap->scroll.img,
+		minimap->half_width * 2 * minimap->item_size + 38, 10);
 }
 
 void	draw_minimap(t_minimap *minimap, t_game *game)
