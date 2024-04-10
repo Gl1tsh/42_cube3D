@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 19:20:03 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/30 16:22:40 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/10 21:35:01 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,23 @@ int	parse_texture(t_game *game, char *line)
 
 	parts = ft_split(line, ' ');
 	if (ft_strcmp(parts[0], "NO") == 0)
-		if (load_anim(&game->map.north, 0, parts + 1, game->mlx) != 0)
-			return (1);
-	if (ft_strcmp(parts[0], "SO") == 0)
 		if (load_anim(&game->map.south, 0, parts + 1, game->mlx) != 0)
-			return (1);
+			return (ERR_TEXTURE_NORTH);
+	if (ft_strcmp(parts[0], "SO") == 0)
+		if (load_anim(&game->map.north, 0, parts + 1, game->mlx) != 0)
+			return (ERR_TEXTURE_SOUTH);
 	if (ft_strcmp(parts[0], "WE") == 0)
-		if (load_anim(&game->map.west, 60, parts + 1, game->mlx) != 0)
-			return (1);
+		if (load_anim(&game->map.east, 60, parts + 1, game->mlx) != 0)
+			return (ERR_TEXTURE_WEST);
 	if (ft_strcmp(parts[0], "EA") == 0)
-		if (load_anim(&game->map.east, 0, parts + 1, game->mlx) != 0)
-			return (1);
+		if (load_anim(&game->map.west, 0, parts + 1, game->mlx) != 0)
+			return (ERR_TEXTURE_EAST);
 	if (ft_strcmp(parts[0], "F") == 0)
 		if (load_anim(&game->map.floor, 0, parts + 1, game->mlx) != 0)
-			return (1);
+			return (ERR_TEXTURE_FLOOR);
 	if (ft_strcmp(parts[0], "C") == 0)
 		if (load_anim(&game->map.ceiling, 0, parts + 1, game->mlx) != 0)
-			return (1);
+			return (ERR_TEXTURE_CEILING);
 	if (ft_strcmp(parts[0], "K") == 0)
 		load_anim(&game->katana, 30, parts + 1, game->mlx);
 	return (free_array(parts));
@@ -93,7 +93,7 @@ int	measure_map(t_game *game, int fd)
 			continue ;
 		}
 		if (is_empty_line(line))
-			return (1);
+			return (ERR_EMPTY_LINE_IN_MAP);
 		if ((int)ft_strlen(line) > game->map.width)
 			game->map.width = ft_strlen(line);
 		game->map.height++;
@@ -105,6 +105,7 @@ int	parse_map(t_game *game, int fd)
 {
 	char		*line;
 	int			y;
+	int			error;
 
 	line = NULL;
 	y = 0;
@@ -119,8 +120,9 @@ int	parse_map(t_game *game, int fd)
 		if (ft_isalpha(line[0]))
 		{
 			line[ft_strlen(line) - 1] = '\0';
-			if (parse_texture(game, line) != 0)
-				return (1);
+			error = parse_texture(game, line);
+			if (error)
+				return (error);
 			continue ;
 		}
 		ft_memcpy(game->map.bytes + (game->map.width * y),

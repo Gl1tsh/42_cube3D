@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:16 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/30 17:11:45 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/10 21:22:56 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	run_game(t_game *game)
 int	load_hud(t_game *game)
 {
 	if (load_image(&game->hud_img, "assets/hud/hud.xpm", game->mlx) != 0)
-		return (1);
+		return (ERR_HUD);
 	return (0);
 }
 
@@ -52,19 +52,15 @@ int	main(int argc, char **argv)
 	init_game(&game);
 	game.mlx = mlx_init();
 	if (game.mlx == NULL)
-		game_quit_error(&game, "erreur mlx init");
-	if (load_map(&game, argv[1]) != 0)
-		game_quit_error(&game, "erreur fichier map");
-	if (load_hud(&game))
-		game_quit_error(&game, "erreur load hud");
+		game_quit_error(&game, ERR_MLX);
+	quit_if_error(&game, load_map(&game, argv[1]));
+	quit_if_error(&game, load_hud(&game));
 	game.win = mlx_new_window(game.mlx, game.width, game.height, "cub3d");
 	if (game.win == NULL)
-		game_quit_error(&game, "erreur game window");
+		game_quit_error(&game, ERR_MLX);
 	create_image(&game.canvas, game.width, game.height, game.mlx);
-	if (init_minimap(&game.minimap, game.mlx))
-		game_quit_error(&game, "erreur init minimap");
-	if (init_menu(&game))
-		game_quit_error(&game, "erreur init menu");
+	quit_if_error(&game, init_minimap(&game.minimap, game.mlx));
+	quit_if_error(&game, init_menu(&game));
 	run_game(&game);
 	return (1);
 }

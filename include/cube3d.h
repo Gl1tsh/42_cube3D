@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:49 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/30 17:12:13 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/10 20:15:11 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # include <string.h>
 # include <sys/errno.h>
 # include <math.h>
+
+# include "error.h"
 
 # define WHITESPACE_CHARSET " \t\n\v\f\r"
 
@@ -131,9 +133,10 @@ typedef struct s_ray
 }	t_ray;
 
 // free or quit game
-void			game_quit_error(t_game *game, const char *error_msg);
+void			game_quit_error(t_game *game, int error_number);
 void			game_quit(t_game *game);
 void			game_free(t_game *game);
+void			quit_if_error(t_game *game, int error_number);
 
 // utils
 long			get_timestamp_ms(void);

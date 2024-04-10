@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:33:31 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/29 15:56:44 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/10 21:21:05 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	load_map(t_game *game, char *path_name)
 		return (error);
 	game->map.bytes = malloc(game->map.width * game->map.height);
 	if (game->map.bytes == NULL)
-		return (1);
+		return (ERR_ALLOC_ERROR);
 	ft_memset(game->map.bytes, '1', game->map.width * game->map.height);
 	fd = open(path_name, O_RDONLY);
 	error = parse_map(game, fd);

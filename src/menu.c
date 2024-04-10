@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:34:08 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/28 19:16:10 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/10 21:27:35 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,11 @@ int	menu_loop(t_game *game, long now)
 int	init_menu(t_game *game)
 {
 	if (load_image(&game->menu1_img, "assets/menu/menu1.xpm", game->mlx) != 0)
-		return (1);
+		return (ERR_MENU);
 	if (load_image(&game->menu2_img, "assets/menu/menu2.xpm", game->mlx) != 0)
-		return (1);
+		return (ERR_MENU);
 	if (load_image(&game->menuv_img, "assets/menu/menuv.xpm", game->mlx) != 0)
-		return (1);
+		return (ERR_MENU);
 	game->display_menu = 3;
 	mlx_mouse_hide();
 	return (0);

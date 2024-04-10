@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 16:45:26 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/28 19:49:16 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/10 21:21:44 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	load_anim(t_anim *anim, int frame_duration,
 		anim->count++;
 	anim->sprites = malloc(sizeof(t_anim) * anim->count);
 	if (anim->sprites == NULL)
-		return (1);
+		return (ERR_ALLOC_ERROR);
 	i = 0;
 	while (filenames[i] != NULL)
 	{

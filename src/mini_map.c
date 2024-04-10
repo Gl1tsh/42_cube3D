@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:56:10 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/31 14:40:32 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/10 21:26:17 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	init_minimap(t_minimap *minimap, void *mlx)
 	minimap->half_height = 5;
 	minimap->item_size = 10;
 	if (load_image(&minimap->scroll, "assets/scroll.xpm", mlx) != 0)
-		return (1);
+		return (ERR_MINIMAP);
 	return (create_image(&minimap->image,
 			minimap->half_width * 2 * minimap->item_size,
 			minimap->half_height * 2 * minimap->item_size, mlx));
@@ -96,3 +96,4 @@ void	draw_minimap(t_minimap *minimap, t_game *game)
 	}
 	draw_player(minimap, game);
 }
+
