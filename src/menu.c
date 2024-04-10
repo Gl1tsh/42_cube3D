@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nagiorgi <nagiorgi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:34:08 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/04/10 21:27:35 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/10 21:40:05 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int	menu_loop(t_game *game, long now)
 		game->next_frame_ts = 0;
 		return (0);
 	}
+	else if (game->keys[KEY_ESC])
+		game_quit(game);
 	if (now > game->next_frame_ts)
 	{
 		draw_menu(game);

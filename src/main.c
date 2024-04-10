@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: nagiorgi <nagiorgi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:16 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/04/10 21:22:56 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/10 21:40:35 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	run_game(t_game *game)
 	mlx_hook(game->win, 17, 0, (void *)game_quit, game);
 	mlx_hook(game->win, 2, 1L << 0, key_pressed, game);
 	mlx_hook(game->win, 3, 1L << 1, key_release, game);
+	mlx_mouse_move(game->win, 0, 0);
 	mlx_loop_hook(game->mlx, game_loop, game);
 	mlx_loop(game->mlx);
 }
