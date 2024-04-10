@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 15:54:13 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/04/10 21:25:49 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/10 21:53:05 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,6 @@ static char *error_msgs[] = {
 	"Minimap error",
 };
 
-void	print_error(int error_number)
-{
-	if (error_number < 0 || error_number > ERR_MAX)
-		printf("Error\nGlobal Error\n");
-	else
-		printf("Error\n%s\n", error_msgs[error_number]);
-}
-
 void	game_free(t_game *game)
 {
 	if (game->win != NULL)
@@ -63,8 +55,8 @@ void	game_quit(t_game *game)
 void	game_quit_error(t_game *game, int error_number)
 {
 	game_free(game);
-	if (error_number < 0 || error_number > 4)
-		printf("Error\nGlobal Error\n");
+	if (error_number < 0 || error_number > ERR_MAX)
+		printf("Error\nGlobal Error %d\n", error_number);
 	else
 		printf("Error\n%s\n", error_msgs[error_number]);
 	exit(1);

@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:16 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/04/10 21:40:35 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/10 21:43:23 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,3 +65,4 @@ int	main(int argc, char **argv)
 	run_game(&game);
 	return (1);
 }
+

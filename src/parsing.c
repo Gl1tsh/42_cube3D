@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 19:20:03 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/04/10 21:35:01 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/10 21:48:13 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,17 @@ int	check_texture(int *counters, char *line)
 	char	**parts;
 
 	parts = ft_split(line, ' ');
-	if (ft_strcmp(parts[0], "NO") == 0)
+	if (ft_strcmp(parts[0], "NO") == 0 && parts[1] != NULL)
 		counters[0]++;
-	if (ft_strcmp(parts[0], "SO") == 0)
+	if (ft_strcmp(parts[0], "SO") == 0 && parts[1] != NULL)
 		counters[1]++;
-	if (ft_strcmp(parts[0], "WE") == 0)
+	if (ft_strcmp(parts[0], "WE") == 0 && parts[1] != NULL)
 		counters[2]++;
-	if (ft_strcmp(parts[0], "EA") == 0)
+	if (ft_strcmp(parts[0], "EA") == 0 && parts[1] != NULL)
 		counters[3]++;
-	if (ft_strcmp(parts[0], "F") == 0)
+	if (ft_strcmp(parts[0], "F") == 0 && parts[1] != NULL)
 		counters[4]++;
-	if (ft_strcmp(parts[0], "C") == 0)
+	if (ft_strcmp(parts[0], "C") == 0 && parts[1] != NULL)
 		counters[5]++;
 	free_array(parts);
 	return (0);
