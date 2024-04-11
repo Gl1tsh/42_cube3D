@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:56:10 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/04/10 21:26:17 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/11 10:33:40 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,3 @@ void	draw_minimap(t_minimap *minimap, t_game *game)
 	}
 	draw_player(minimap, game);
 }
-

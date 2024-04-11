@@ -6,13 +6,13 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 15:54:13 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/04/10 21:53:05 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/11 10:35:05 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-static char *error_msgs[] = {
+static char	*g_error_msgs[] = {
 	"no error",
 	"global error",
 	"North texture loading failure",
@@ -58,7 +58,7 @@ void	game_quit_error(t_game *game, int error_number)
 	if (error_number < 0 || error_number > ERR_MAX)
 		printf("Error\nGlobal Error %d\n", error_number);
 	else
-		printf("Error\n%s\n", error_msgs[error_number]);
+		printf("Error\n%s\n", g_error_msgs[error_number]);
 	exit(1);
 }
 
@@ -67,4 +67,3 @@ void	quit_if_error(t_game *game, int error_number)
 	if (error_number > 0)
 		game_quit_error(game, error_number);
 }
-
