@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:33:31 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/04/11 15:21:43 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/11 22:24:16 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ int	load_map(t_game *game, char *path_name)
 
 	game->map.width = 0;
 	game->map.height = 0;
-	fd = open(path_name, O_RDONLY);
 	error = extension_checker(path_name);
 	if (error)
 		return (error);
+	fd = open(path_name, O_RDONLY);
 	error = measure_map(game, fd);
 	close(fd);
 	if (error)
