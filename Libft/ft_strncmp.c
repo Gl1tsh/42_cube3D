@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 13:30:54 by nagiorgi          #+#    #+#             */
-/*   Updated: 2023/10/23 16:08:13 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/11 15:25:48 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 #include "libft.h"
 
-int	ft_strncmp(const char *s1, char *s2, size_t n)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;
 
