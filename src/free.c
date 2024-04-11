@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 15:54:13 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/04/11 10:35:05 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/11 15:31:22 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static char	*g_error_msgs[] = {
 	"MLX error",
 	"Allocation error",
 	"Minimap error",
+	"Missing informations on files",
 };
 
 void	game_free(t_game *game)
@@ -48,12 +49,16 @@ void	game_free(t_game *game)
 
 void	game_quit(t_game *game)
 {
+	if (system("pgrep afplay > /dev/null") == 0)
+		system("killall afplay");
 	game_free(game);
 	exit(0);
 }
 
 void	game_quit_error(t_game *game, int error_number)
 {
+	if (system("pgrep afplay > /dev/null") == 0)
+		system("killall afplay");
 	game_free(game);
 	if (error_number < 0 || error_number > ERR_MAX)
 		printf("Error\nGlobal Error %d\n", error_number);
