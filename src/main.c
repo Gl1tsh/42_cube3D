@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:16 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/04/11 15:16:27 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/11 15:43:05 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	key_release(int keycode, t_game *game)
 void	run_game(t_game *game)
 {
 	if (fork() == 0)
-	  execl("/usr/bin/afplay", "afplay", "./assets/sound/soundtrack.mp3", NULL);
+		execl("/usr/bin/afplay", "afplay", "./assets/sound/soundtrack.mp3",
+			NULL);
 	mlx_hook(game->win, 17, 0, (void *)game_quit, game);
 	mlx_hook(game->win, 2, 1L << 0, key_pressed, game);
 	mlx_hook(game->win, 3, 1L << 1, key_release, game);
