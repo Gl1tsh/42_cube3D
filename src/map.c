@@ -6,11 +6,23 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:33:31 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/04/10 21:21:05 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/11 15:21:43 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
+int	extension_checker(char *path)
+{
+	const char	*extension;
+
+	extension = ".cub";
+	if (ft_strlen(path) >= ft_strlen(extension)
+		&& ft_strncmp(path + ft_strlen(path) \
+		- ft_strlen(extension), extension, ft_strlen(extension)) != 0)
+		return (ERR_FILE_EXTENSION);
+	return (0);
+}
 
 void	free_map(t_game *game)
 {
@@ -40,6 +52,9 @@ int	load_map(t_game *game, char *path_name)
 	game->map.width = 0;
 	game->map.height = 0;
 	fd = open(path_name, O_RDONLY);
+	error = extension_checker(path_name);
+	if (error)
+		return (error);
 	error = measure_map(game, fd);
 	close(fd);
 	if (error)
