@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:04:18 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/04/10 21:00:20 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/11 12:28:32 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	check_bounds(t_game *game)
 
 	map_copy = malloc(game->map.width * game->map.height);
 	if (map_copy == NULL)
-		return (1);
+		return (ERR_ALLOC_ERROR);
 	ft_memcpy(map_copy, game->map.bytes, game->map.width * game->map.height);
 	if (flood_fill(game, map_copy, game->map.player_x, game->map.player_y) != 0)
 	{
