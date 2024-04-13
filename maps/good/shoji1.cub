@@ -1,8 +1,7 @@
-NO assets/japan/north.xpm
-SO assets/japan/south.xpm
-WE assets/japan/west_lantern_1.xpm assets/japan/west_lantern_1.xpm assets/japan/west_lantern_1.xpm assets/japan/west_lantern_1.xpm assets/japan/west_lantern_1.xpm assets/japan/west_lantern_1.xpm assets/japan/west_lantern_1.xpm assets/japan/west_lantern_1.xpm assets/japan/west_lantern_1.xpm assets/japan/west_lantern_1.xpm assets/japan/west_lantern_1.xpm assets/japan/west_lantern_2.xpm assets/japan/west_lantern_3.xpm assets/japan/west_lantern_4.xpm assets/japan/west_lantern_5.xpm assets/japan/west_lantern_6.xpm assets/japan/west_lantern_7.xpm assets/japan/west_lantern_8.xpm assets/japan/west_lantern_9.xpm assets/japan/west_lantern_10.xpm assets/japan/west_lantern_11.xpm assets/japan/west_lantern_12.xpm assets/japan/west_lantern_13.xpm assets/japan/west_lantern_14.xpm assets/japan/west_lantern_15.xpm assets/japan/west_lantern_16.xpm assets/japan/west_lantern_17.xpm assets/japan/west_lantern_18.xpm assets/japan/west_lantern_19.xpm assets/japan/west_lantern_20.xpm assets/japan/west_lantern_19.xpm assets/japan/west_lantern_18.xpm assets/japan/west_lantern_17.xpm assets/japan/west_lantern_16.xpm assets/japan/west_lantern_15.xpm assets/japan/west_lantern_14.xpm assets/japan/west_lantern_13.xpm assets/japan/west_lantern_12.xpm assets/japan/west_lantern_11.xpm assets/japan/west_lantern_10.xpm assets/japan/west_lantern_9.xpm assets/japan/west_lantern_8.xpm assets/japan/west_lantern_7.xpm assets/japan/west_lantern_6.xpm assets/japan/west_lantern_5.xpm assets/japan/west_lantern_4.xpm assets/japan/west_lantern_3.xpm assets/japan/west_lantern_2.xpm
-EA assets/japan/east.xpm
-
+NO 255,10,25
+SO 10,25,128
+WE 255,92,39
+EA 49,25,49
 F 25,94,35
 C 151,196,247
 
