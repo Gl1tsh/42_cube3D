@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 15:54:13 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/04/11 15:31:22 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/13 15:46:01 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ static char	*g_error_msgs[] = {
 	"MLX error",
 	"Allocation error",
 	"Minimap error",
+	"Menu error",
 	"Missing informations on files",
+	"Bad file",
 };
 
 void	game_free(t_game *game)

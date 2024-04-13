@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 19:54:00 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/04/11 12:24:08 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/13 15:44:28 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # define ERR_MINIMAP					21
 # define ERR_MENU						22
 # define ERR_MISSING_INFORMATION		23
-# define ERR_MAX						23
+# define ERR_BAD_FILE					24
+# define ERR_MAX						24
 
 #endif

@@ -6,22 +6,39 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:33:31 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/04/12 00:54:10 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/13 15:49:29 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-int	extension_checker(char *path)
-{
-	const char	*extension;
+#define CUB_EXT    ".cub"
 
-	extension = ".cub";
-	if (ft_strlen(path) >= ft_strlen(extension)
+int	file_checker(char *path)
+{
+	char		buffer;
+	int			fd;
+	ssize_t		bytesread;
+
+	if (ft_strlen(path) >= ft_strlen(CUB_EXT)
 		&& ft_strncmp(path + ft_strlen(path) \
-		- ft_strlen(extension), extension, ft_strlen(extension)) != 0)
+		- ft_strlen(CUB_EXT), CUB_EXT, ft_strlen(CUB_EXT)) != 0)
 		return (ERR_FILE_EXTENSION);
-	return (0);
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (ERR_BAD_FILE);
+	bytesread = read(fd, &buffer, 1);
+	while (bytesread > 0)
+	{
+		if (ft_strchr(WHITESPACE_CHARSET, buffer) == NULL)
+		{
+			close(fd);
+			return (0);
+		}
+		bytesread = read(fd, &buffer, 1);
+	}
+	close(fd);
+	return (ERR_FILE_EMPTY);
 }
 
 void	free_map(t_game *game)
@@ -80,7 +97,7 @@ int	load_map(t_game *game, char *path_name)
 
 	game->map.width = 0;
 	game->map.height = 0;
-	error = extension_checker(path_name);
+	error = file_checker(path_name);
 	if (error)
 		return (error);
 	fd = open(path_name, O_RDONLY);
