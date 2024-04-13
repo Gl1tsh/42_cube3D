@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 16:45:26 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/04/10 21:21:44 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/13 17:23:23 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ int	load_anim(t_anim *anim, int frame_duration,
 	while (filenames[i] != NULL)
 	{
 		if (load_image(&anim->sprites[i], filenames[i], mlx) != 0)
+		{
+			anim->count = i;
 			return (1);
+		}
 		i++;
 	}
 	anim->current = &anim->sprites[0];
