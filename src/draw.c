@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:27:16 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/03/18 17:40:06 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/13 16:44:23 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ void	compute_ray(t_game *game, t_ray *ray)
 		ray->y += ray->sin;
 		wall = map_get_at(&game->map, ray->x, ray->y);
 	}
-	ray->distance = sqrt(pow(game->player_x - ray->x, 2.0)
-			+ pow(game->player_y - ray->y, 2.0));
+	ray->distance = hypot(game->player_x - ray->x, game->player_y - ray->y);
 	ray->distance = ray->distance * ray->fisheye_corr;
 	ray->wall_height = (double)(game->height) / (1.5 * ray->distance);
 }
