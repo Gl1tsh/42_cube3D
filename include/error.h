@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 19:54:00 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/04/13 15:44:28 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/14 15:49:28 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,18 @@
 # define ERR_HUD						8
 # define ERR_FILE_EXTENSION				9
 # define ERR_FILE_EMPTY					10
-# define ERR_MAP_MISPLACED				11
-# define ERR_MAP_MISSING				12
-# define ERR_MAP_ALLOCATION				13
-# define ERR_MAP_SIZE_TOO_SMALL			14
-# define ERR_MAP_BORDERS				15
-# define ERR_PLAYER_MISSING				16
-# define ERR_INVALID_CHAR				17
-# define ERR_EMPTY_LINE_IN_MAP			18
-# define ERR_MLX						19
-# define ERR_ALLOC_ERROR				20
-# define ERR_MINIMAP					21
-# define ERR_MENU						22
-# define ERR_MISSING_INFORMATION		23
-# define ERR_BAD_FILE					24
-# define ERR_MAX						24
+# define ERR_MAP_ALLOCATION				11
+# define ERR_MAP_SIZE_TOO_SMALL			12
+# define ERR_MAP_BORDERS				13
+# define ERR_PLAYER_MISSING				14
+# define ERR_INVALID_CHAR				15
+# define ERR_EMPTY_LINE_IN_MAP			16
+# define ERR_MLX						17
+# define ERR_ALLOC_ERROR				18
+# define ERR_MINIMAP					19
+# define ERR_MENU						20
+# define ERR_MISSING_INFORMATION		21
+# define ERR_BAD_FILE					22
+# define ERR_MAX						23
 
 #endif

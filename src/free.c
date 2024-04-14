@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 15:54:13 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/04/13 15:46:01 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/14 15:48:39 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ static char	*g_error_msgs[] = {
 	"HUD texture loading failure",
 	"File extension",
 	"File empty",
-	"Map misplaced",
-	"Map missing",
 	"Map allocation",
 	"Map size too small",
 	"Map borders",
