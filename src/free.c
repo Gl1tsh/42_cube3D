@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 15:54:13 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/04/14 15:48:39 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:28:02 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,10 @@ void	quit_if_error(t_game *game, int error_number)
 {
 	if (error_number > 0)
 		game_quit_error(game, error_number);
+}
+
+int	free_error(char *str, int error_number)
+{
+	free(str);
+	return (error_number);
 }

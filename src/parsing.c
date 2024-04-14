@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 19:20:03 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/04/12 00:54:02 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:26:18 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	measure_map(t_game *game, int fd)
 			continue ;
 		}
 		if (is_empty_line(line))
-			return (ERR_EMPTY_LINE_IN_MAP);
+			return (free_error(line, ERR_EMPTY_LINE_IN_MAP));
 		if ((int)ft_strlen(line) > game->map.width)
 			game->map.width = ft_strlen(line);
 		game->map.height++;

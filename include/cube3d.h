@@ -6,7 +6,7 @@
 /*   By: nagiorgi <nagiorgi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:36:49 by nagiorgi          #+#    #+#             */
-/*   Updated: 2024/04/12 00:55:20 by nagiorgi         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:27:36 by nagiorgi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ void			game_quit_error(t_game *game, int error_number);
 void			game_quit(t_game *game);
 void			game_free(t_game *game);
 void			quit_if_error(t_game *game, int error_number);
+int				free_error(char *str, int error_number);
 
 // utils
 long			get_timestamp_ms(void);
