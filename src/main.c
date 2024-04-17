@@ -50,7 +50,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		printf("Bad arguments\n");
+		printf("Error\nBad arguments\n");
 		return (1);
 	}
 	init_game(&game);
