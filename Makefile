@@ -1,6 +1,6 @@
 NAME = cub3D
 CC = gcc
-FLAGS = -Wall -Werror -Wextra -I./include -I./minilibx -I./libft -g
+FLAGS = -Wall -Werror -Wextra -I./include -I./minilibx -I./libft -g #-fsanitize=address
 #FLAGS = -Wall -Wextra -I./include -I./minilibx -g
 MLXDIR = ./minilibx
 LIBFTDIR = ./Libft
