@@ -54,9 +54,9 @@ void	free_map(t_game *game)
 
 char	map_get_at(t_map *map, int x, int y)
 {
-	if (x < 0 || x > map->width)
+	if (x < 0 || x >= map->width)
 		return ('1');
-	if (y < 0 || y > map->height)
+	if (y < 0 || y >= map->height)
 		return ('1');
 	return (map->bytes[y * map->width + x]);
 }
