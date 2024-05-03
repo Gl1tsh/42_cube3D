@@ -1,5 +1,9 @@
 # CUBE3D
 
+<p align="center">
+  <img width="1021" alt="cube3D_menu" src="https://github.com/Gl1tsh/42_cube3D/assets/69108289/35c25578-a16b-4231-97a4-9cdddd001b8a">
+</p>
+
 The Cube3D project at 42 school is an introductory project that focuses on creating a simple 3D graphics engine using the Raycasting technique. The objective of the project is to render a 3D maze-like environment on the screen using only 2D graphics primitives.
 
 This project introduces students to several key concepts in computer graphics and game development, including:
@@ -17,3 +21,7 @@ This project introduces students to several key concepts in computer graphics an
 - *Game Loop*: Students implement a game loop to continuously update the game state, handle user input, and render the graphics to provide an interactive gameplay experience.
 
 In summary, the Cube3D project provides students with hands-on experience in computer graphics and game development. It allows them to apply their knowledge of mathematics, algorithms, and C programming to create a simple yet visually impressive 3D graphics engine using the Raycasting technique.
+
+<p align="center">
+  <img width="1020" alt="cube3D_game" src="https://github.com/Gl1tsh/42_cube3D/assets/69108289/e3caed5f-6e70-4499-876c-cdb03d9aaeb8">
+</p>
