@@ -41,6 +41,7 @@ In summary, the Cube3D project provides students with hands-on experience in com
 - Run the command: ```make```
 - Once compiled, launch the game with a valid map: ```./cub3D maps/good/<map of your choice>```
 - Exemple, you can copy past this : ```./cub3D maps/good/shoji.cub```
+- To exit the game at any time, simply press ```esc``` key
 
 ## Mouvement
 | Commands                  | Move                            |
