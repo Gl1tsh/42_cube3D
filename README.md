@@ -25,3 +25,16 @@ In summary, the Cube3D project provides students with hands-on experience in com
 <p align="center">
   <img width="1020" alt="cube3D_game" src="https://github.com/Gl1tsh/42_cube3D/assets/69108289/e3caed5f-6e70-4499-876c-cdb03d9aaeb8">
 </p>
+
+
+# How to launch the game :
+
+Run the command: ```make```
+- Once compiled, launch the game with a valid map: ```./cub3D maps/good/<map of your choice>```
+- Exemple, you can copy past this : ```./cub3D maps/good/shoji.cub```
+
+Mouvement
+| Commands                  | Move                            |
+|---------------------------|---------------------------------|
+| `W`/`A`/`S`/`D`           | front/left/down/right           |
+| `mouse rotate`            | turn left or right              |
